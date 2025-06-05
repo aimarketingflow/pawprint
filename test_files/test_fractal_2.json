@@ -1,0 +1,25 @@
+{
+    "name": "Test Julia Set",
+    "fractalType": "julia",
+    "points": [
+        {"x": 0.285, "y": 0.01},
+        {"x": -0.835, "y": -0.2321},
+        {"x": -0.8, "y": 0.156}
+    ],
+    "viewportSettings": {
+        "zoom": 1.8,
+        "centerX": 0.0,
+        "centerY": 0.0
+    },
+    "colors": {
+        "interior": "#000000",
+        "gradient": [
+            {"position": 0.0, "color": "#9900FF"},
+            {"position": 0.3, "color": "#00CCFF"},
+            {"position": 0.7, "color": "#FFCC00"},
+            {"position": 1.0, "color": "#FF0066"}
+        ]
+    },
+    "iterations": 150,
+    "timestamp": "2025-06-03T22:41:00-07:00"
+}

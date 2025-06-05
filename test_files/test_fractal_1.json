@@ -1,0 +1,24 @@
+{
+    "name": "Test Fractal Butterfly",
+    "fractalType": "mandelbrot",
+    "points": [
+        {"x": -0.7, "y": 0.0},
+        {"x": -0.4, "y": 0.6},
+        {"x": 0.0, "y": -0.8}
+    ],
+    "viewportSettings": {
+        "zoom": 1.5,
+        "centerX": -0.5,
+        "centerY": 0.0
+    },
+    "colors": {
+        "interior": "#000000",
+        "gradient": [
+            {"position": 0.0, "color": "#0000FF"},
+            {"position": 0.5, "color": "#00FF00"},
+            {"position": 1.0, "color": "#FF0000"}
+        ]
+    },
+    "iterations": 100,
+    "timestamp": "2025-06-03T22:40:00-07:00"
+}

@@ -1,0 +1,22 @@
+{
+    "fingerprint_id": "test-fp-002",
+    "timestamp": "2025-06-03T22:39:00-07:00",
+    "device_info": {
+        "browser": "Firefox 99.0",
+        "os": "macOS 14.1",
+        "device": "Desktop"
+    },
+    "network_features": {
+        "ip_address": "192.168.1.2",
+        "autonomous_system": "AS7922",
+        "connection_type": "ethernet"
+    },
+    "browser_features": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Firefox/99.0",
+        "language": "en-US",
+        "timezone": "America/Los_Angeles",
+        "plugins": ["PDF Viewer", "Firefox Default Browser Helper"]
+    },
+    "canvas_fingerprint": "8d42a7c59271dc2bc8e9bf96e87ed442",
+    "webgl_fingerprint": "f8a432b1d9e8e7c6a5f4b3c2d1b9a8c7"
+}

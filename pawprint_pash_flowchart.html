@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pawprinting PyQt6 - Pash Generation Flowchart</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 90vh; background-color: #f0f0f0; }
+        .mermaid { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <pre class="mermaid">
+graph TD;
+    A[User] -- Enters text --> B(TextInputWidget);
+    B -- Clicks 'Generate Parameters' --> C{TextToFractalConverter.\ntext_to_parameters(text)};
+
+    subgraph TextToFractalConverter Logic
+        direction LR
+        C1[1. Input Text Received];
+        C2[2. Standard Hashes (SHA256, SHA512) generated from text\n(used as internal seeds/drivers)];
+        C3[3. 'Pash' (pawprint_signature) Generation:\n   - SHA256 hash guides selection\n   - 5 sampling points derived\n   - 3 chars/sequence extracted from input text at points\n   - Segments concatenated];
+        C4[4. Other Fractal Parameters Calculated\n(dimension, wing_ratio, etc.)];
+        C5[5. Returns `params` dictionary\n(incl. text_input, fractal params, pawprint_signature, entropy, created_at)];
+        C1 --> C2 --> C3 --> C4 --> C5;
+    end
+
+    C -- params dictionary --> B;
+    B -- User clicks 'Save Configuration' --> D{TextToFractalConverter.\nsave_configuration(params)};
+    D -- Saves .json file (incl. 'Pash') --> E[(configs/your_config.json)];
+
+    F[User] -- Loads .json file via 'Browse' --> G(AnalyzeScreen);
+    G -- Passes loaded data (params) --> H(JsonViewerWidget);
+    H -- Displays 'Raw Data' --> I[Formatted JSON Output in UI\n(shows 'pawprint_signature')];
+
+    %% Styling
+    classDef userNode fill:#f9f,stroke:#333,stroke-width:2px,color:#000;
+    classDef uiNode fill:#9cf,stroke:#333,stroke-width:2px,color:#000;
+    classDef backendNode fill:#9c9,stroke:#333,stroke-width:2px,color:#000;
+    classDef dataNode fill:#fcc,stroke:#333,stroke-width:2px,color:#000;
+    classDef processNode fill:#ff9,stroke:#333,stroke-width:2px,color:#000;
+
+
+    class A,F userNode;
+    class B,G,H,I uiNode;
+    class C,D backendNode;
+    class E dataNode;
+    class TextToFractalConverter,C1,C2,C3,C4,C5 processNode;
+    </pre>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>

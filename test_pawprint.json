@@ -1,0 +1,19 @@
+{
+  "name": "Test Pawprint",
+  "timestamp": "2025-06-03T18:21:00",
+  "text_input": "This is a test pawprint file",
+  "entropy": 0.75,
+  "hash_algorithm": "sha256",
+  "signature": "a1b2c3d4e5f6g7h8i9j0",
+  "metadata": {
+    "generated_by": "Test",
+    "version": "2.0"
+  },
+  "data_points": [
+    {"x": 0, "y": 0},
+    {"x": 1, "y": 0.5},
+    {"x": 2, "y": 0.8},
+    {"x": 3, "y": 0.9},
+    {"x": 4, "y": 1.0}
+  ]
+}

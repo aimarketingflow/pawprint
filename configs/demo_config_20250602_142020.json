@@ -1,0 +1,19 @@
+{
+  "text_input": "\n            The butterfly effect is the concept that small changes can have large effects.\n            Initially, it was used with weather prediction but later became a metaphor for \n            how small events can lead to significant changes in complex systems. The term comes\n            from the suggestion that the flapping of a butterfly's wings in Brazil might \n            eventually cause a tornado in Texas.\n            \n            In chaos theory, this behavior is seen in systems where a small change in initial\n            conditions can lead to vastly different outcomes, making prediction impossible\n            beyond a certain time horizon. The butterfly effect is a poetic way to describe\n            this mathematical concept - that in a complex and interconnected world, small actions\n            can ripple outward to create massive transformations.\n            ",
+  "fractal_dimension": 1.49,
+  "wing_ratio": 3.95,
+  "symmetry": 0.16,
+  "density": 0.2,
+  "iterations": 940,
+  "resolution": [
+    400,
+    400
+  ],
+  "color_scheme": "cosmic",
+  "use_base_fractal": true,
+  "base_fractal_pattern": "mandelbrot",
+  "base_fractal_influence": 0.65,
+  "text_entropy": 0.495,
+  "created_at": "2025-06-02T14:20:20.754036",
+  "name": "demo_config_20250602_142020"
+}

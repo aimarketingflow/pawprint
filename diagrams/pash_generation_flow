@@ -1,0 +1,42 @@
+digraph "Pawprinting PyQt6 - Pash Generation Flow" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Pawprinting PyQt6 - Pash Generation Flow" nodesep=0.60 pad=2.0 rankdir=TB ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	"4f01d9c8fd414bfc90c08bc92790003b" [label=User height=1.9 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/onprem/client/user.png" shape=none]
+	subgraph "cluster_UI Layer" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="UI Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		cfcdf7919d124fc2b4505ea82a607301 [label=TextInputWidget height=1.9 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/framework/react.png" shape=none]
+		ab9fd7b7d99b44f5b03e1f8eccf48ec7 [label=AnalyzeScreen height=1.9 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/framework/react.png" shape=none]
+		"3a586857392a425288d6b588f4da039e" [label=JsonViewerWidget height=1.9 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/framework/react.png" shape=none]
+	}
+	subgraph "cluster_Backend Layer" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Backend Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"66e76a383f184022b8972bc5ce1bfbb3" [label=TextToFractalConverter height=1.9 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+		subgraph "cluster_text_to_parameters Method" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="text_to_parameters Method" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			e3f591c8f23844d693b24b4e70604f30 [label="Standard Hash Generation
+(SHA256, SHA512)" height=2.3 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+			"1b1a7c5ba7394913ae89374c3008a0aa" [label="Pash Generation
+(5 points, 3 chars each)" height=2.3 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+			"6e110fab9ec04f2bb3ff21b6e888c913" [label="Fractal Parameters
+Calculation" height=2.3 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+			"664675468d0c4180aa25321b8825e3c5" [label="Params Dictionary
+Creation" height=2.3 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/programming/language/python.png" shape=none]
+		}
+	}
+	f15f5e5cb0614f6a852102352a085beb [label="Saved Config
+(JSON)" height=2.3 image="/Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2/diagrams/pash_diagram_venv/lib/python3.9/site-packages/resources/generic/storage/storage.png" shape=none]
+	"4f01d9c8fd414bfc90c08bc92790003b" -> cfcdf7919d124fc2b4505ea82a607301 [label="Enter text" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cfcdf7919d124fc2b4505ea82a607301 -> "66e76a383f184022b8972bc5ce1bfbb3" [label="Generate Parameters" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"66e76a383f184022b8972bc5ce1bfbb3" -> e3f591c8f23844d693b24b4e70604f30 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	e3f591c8f23844d693b24b4e70604f30 -> "1b1a7c5ba7394913ae89374c3008a0aa" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"1b1a7c5ba7394913ae89374c3008a0aa" -> "6e110fab9ec04f2bb3ff21b6e888c913" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"6e110fab9ec04f2bb3ff21b6e888c913" -> "664675468d0c4180aa25321b8825e3c5" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"664675468d0c4180aa25321b8825e3c5" -> "66e76a383f184022b8972bc5ce1bfbb3" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"66e76a383f184022b8972bc5ce1bfbb3" -> cfcdf7919d124fc2b4505ea82a607301 [label="Return params" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	cfcdf7919d124fc2b4505ea82a607301 -> f15f5e5cb0614f6a852102352a085beb [label="Save Configuration" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"4f01d9c8fd414bfc90c08bc92790003b" -> ab9fd7b7d99b44f5b03e1f8eccf48ec7 [label="Load file" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ab9fd7b7d99b44f5b03e1f8eccf48ec7 -> f15f5e5cb0614f6a852102352a085beb [label="Read file" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ab9fd7b7d99b44f5b03e1f8eccf48ec7 -> "3a586857392a425288d6b588f4da039e" [label="Pass data" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"3a586857392a425288d6b588f4da039e" -> "4f01d9c8fd414bfc90c08bc92790003b" [label="Display 'pawprint_signature'" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

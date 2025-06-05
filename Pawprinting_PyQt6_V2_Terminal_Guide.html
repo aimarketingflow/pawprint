@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 V2 Terminal Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+        h3 {
+            color: #3498db;
+        }
+        code {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-family: Monaco, Consolas, "Courier New", monospace;
+            padding: 2px 4px;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .command-block {
+            margin-bottom: 20px;
+        }
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #ffd600;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pawprinting PyQt6 V2 Terminal Guide</h1>
+
+        <h2>Running the Main Application</h2>
+        <div class="command-block">
+            <p>To run the main application with the full GUI:</p>
+            <pre><code>cd /Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2
+python3 run_pawprint_pyqt6.py</code></pre>
+            <p>This will:</p>
+            <ol>
+                <li>Set up a virtual environment if it doesn't exist</li>
+                <li>Install all necessary dependencies</li>
+                <li>Launch the Pawprinting PyQt6 V2 application</li>
+            </ol>
+        </div>
+
+        <h2>Database CLI Commands</h2>
+        <p>The database functionality can be accessed directly from the command line:</p>
+
+        <h3>List Recent Pawprints</h3>
+        <div class="command-block">
+            <pre><code>cd /Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2
+python3 cli_database.py list --limit 10</code></pre>
+        </div>
+
+        <h3>Search Pawprints</h3>
+        <div class="command-block">
+            <pre><code># Search by name
+python3 cli_database.py search --name "test"
+
+# Search by text content
+python3 cli_database.py search --text "song"
+
+# Search by date range
+python3 cli_database.py search --from-date 2025-05-01 --to-date 2025-06-03
+
+# Search by entropy range
+python3 cli_database.py search --min-entropy 0.5 --max-entropy 0.9
+
+# Search with multiple filters
+python3 cli_database.py search --name "test" --min-entropy 0.7</code></pre>
+        </div>
+
+        <h3>View Specific Pawprint Details</h3>
+        <div class="command-block">
+            <pre><code>python3 cli_database.py view --id 1</code></pre>
+        </div>
+
+        <h3>Delete Pawprints</h3>
+        <div class="command-block">
+            <pre><code># Delete a specific pawprint
+python3 cli_database.py delete --id 1
+
+# Delete with confirmation prompt
+python3 cli_database.py delete --id 1 --confirm
+
+# Force delete without confirmation
+python3 cli_database.py delete --id 1 --force</code></pre>
+        </div>
+
+        <h3>Export Pawprints</h3>
+        <div class="command-block">
+            <pre><code># Export all pawprints
+python3 cli_database.py export --output-dir ./exports
+
+# Export specific pawprints
+python3 cli_database.py export --id 1 --output-dir ./exports</code></pre>
+        </div>
+
+        <h3>Show Database Statistics</h3>
+        <div class="command-block">
+            <pre><code>python3 cli_database.py stats</code></pre>
+        </div>
+
+        <h3>Import Existing Configurations</h3>
+        <div class="command-block">
+            <pre><code>python3 cli_database.py import --config-dir ./config</code></pre>
+        </div>
+
+        <div class="note">
+            <h3>Notes</h3>
+            <ul>
+                <li>All pawprint data is stored locally in the SQLite database</li>
+                <li>The database file is located at <code>./database/pawprints.db</code></li>
+                <li>The history screen can be accessed from the main application via File &gt; History or by pressing Ctrl+H</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

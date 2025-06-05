@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 - Pash Generation Flow</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #343a40;
+        }
+        .diagram-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .group {
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            background-color: #f1f3f5;
+        }
+        .group-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #495057;
+            border-bottom: 1px solid #ced4da;
+            padding-bottom: 5px;
+            font-size: 18px;
+        }
+        .node {
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 180px;
+            min-height: 50px;
+            vertical-align: middle;
+            position: relative;
+            color: white;
+        }
+        .user-node {
+            background-color: #e64980;
+        }
+        .ui-node {
+            background-color: #4dabf7;
+        }
+        .backend-node {
+            background-color: #82c91e;
+        }
+        .process-node {
+            background-color: #fab005;
+            color: #212529;
+        }
+        .data-node {
+            background-color: #fd7e14;
+        }
+        .flow {
+            text-align: center;
+            margin: 15px 0;
+            color: #495057;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .arrow {
+            font-size: 24px;
+            color: #868e96;
+        }
+        .note {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #20c997;
+            color: #495057;
+        }
+        .legend {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pawprinting PyQt6 - Pash Generation Flow</h1>
+    
+    <div class="diagram-container">
+        <!-- User Input Section -->
+        <div class="group">
+            <div class="group-title">User Interaction</div>
+            <div class="node user-node">User</div>
+            <div class="flow">
+                <div>Enters text</div>
+                <div class="arrow">↓</div>
+            </div>
+        </div>
+
+        <!-- UI Layer -->
+        <div class="group">
+            <div class="group-title">UI Layer</div>
+            <div class="node ui-node">TextInputWidget</div>
+            <div class="flow">
+                <div>Clicks "Generate Parameters"</div>
+                <div class="arrow">↓</div>
+            </div>
+        </div>
+
+        <!-- Backend Layer -->
+        <div class="group">
+            <div class="group-title">Backend Layer (TextToFractalConverter)</div>
+            
+            <!-- TextToFractalConverter Processing -->
+            <div style="margin-left: 40px;">
+                <div class="node backend-node">TextToFractalConverter</div>
+                
+                <div class="group" style="margin-left: 40px; margin-top: 20px;">
+                    <div class="group-title">text_to_parameters Method</div>
+                    
+                    <div class="node process-node">1. Text Input Received</div>
+                    <div class="flow">
+                        <div class="arrow">↓</div>
+                    </div>
+                    
+                    <div class="node process-node">2. Standard Hashes Generated<br>(SHA256, SHA512)</div>
+                    <div class="flow">
+                        <div class="arrow">↓</div>
+                    </div>
+                    
+                    <div class="node process-node">3. Pash Generation<br>
+                        <small>- 5 sampling points derived<br>
+                        - 3 chars extracted at each point<br>
+                        - Segments concatenated</small>
+                    </div>
+                    <div class="flow">
+                        <div class="arrow">↓</div>
+                    </div>
+                    
+                    <div class="node process-node">4. Fractal Parameters Calculated<br>
+                        <small>(dimension, wing_ratio, etc.)</small>
+                    </div>
+                    <div class="flow">
+                        <div class="arrow">↓</div>
+                    </div>
+                    
+                    <div class="node process-node">5. Params Dictionary Created<br>
+                        <small>(includes "pawprint_signature")</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flow">
+                <div class="arrow">↑</div>
+                <div>Returns params dictionary</div>
+            </div>
+        </div>
+
+        <!-- Back to UI -->
+        <div class="group">
+            <div class="group-title">UI Layer (Continued)</div>
+            <div class="node ui-node">TextInputWidget</div>
+            <div class="flow">
+                <div>Clicks "Save Configuration"</div>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="node data-node">Saved Configuration<br>(JSON File)</div>
+        </div>
+
+        <!-- Analysis Path -->
+        <div class="group">
+            <div class="group-title">Analysis Flow</div>
+            <div class="node user-node">User</div>
+            <div class="flow">
+                <div>Loads JSON file via "Browse"</div>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="node ui-node">AnalyzeScreen</div>
+            <div class="flow">
+                <div>Reads file & passes data</div>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="node ui-node">JsonViewerWidget</div>
+            <div class="flow">
+                <div>Displays "Raw Data" including<br>"pawprint_signature"</div>
+                <div class="arrow">↓</div>
+            </div>
+            <div class="node user-node">User sees Pash</div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e64980;"></div>
+                <div>User</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #4dabf7;"></div>
+                <div>UI Components</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #82c91e;"></div>
+                <div>Backend Components</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fab005;"></div>
+                <div>Process Steps</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fd7e14;"></div>
+                <div>Data Storage</div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Note about "Pash" Generation:</strong><br>
+            The "Pash" (pawprint_signature) is not a traditional cryptographic hash. Instead, it's a custom signature generated by selecting characters from the original input text. The selection process is guided by the SHA256 hash of the text, making it deterministic yet unique to the specific content.
+        </div>
+    </div>
+</body>
+</html>

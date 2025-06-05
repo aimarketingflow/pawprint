@@ -1,0 +1,22 @@
+{
+    "fingerprint_id": "test-fp-001",
+    "timestamp": "2025-06-03T22:38:00-07:00",
+    "device_info": {
+        "browser": "Chrome 112.0.5615.121",
+        "os": "macOS 13.4",
+        "device": "Desktop"
+    },
+    "network_features": {
+        "ip_address": "192.168.1.1",
+        "autonomous_system": "AS15169",
+        "connection_type": "wifi"
+    },
+    "browser_features": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+        "language": "en-US",
+        "timezone": "America/Los_Angeles",
+        "plugins": ["Chrome PDF Plugin", "Chrome PDF Viewer", "Native Client"]
+    },
+    "canvas_fingerprint": "6f1ed002ab5595859014ebf0951522d9",
+    "webgl_fingerprint": "2a4c4c0db316d148d730a3d2a3c0a9b1"
+}

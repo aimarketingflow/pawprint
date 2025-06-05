@@ -1,0 +1,40 @@
+{
+  "recent_files": [
+    "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
+    "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.json",
+    "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.txt",
+    "/Users/flowgirl/Documents_pawprint.json",
+    "/Users/flowgirl/Documents/FinAI_pawprint.json",
+    "/Users/flowgirl/Documents/PhoneRootKit_pawprint.json"
+  ],
+  "recent_directories": [
+    "/Users/flowgirl/Documents/FolderHackingAnalysis",
+    "/Users/flowgirl/Documents/CrashAnalyzer",
+    "/Users/flowgirl/Documents/MidiKeyFeed",
+    "/Users/flowgirl/Documents",
+    "/Users/flowgirl/Documents/FinAI",
+    "/Users/flowgirl/Documents/PhoneRootKit"
+  ],
+  "last_session": {
+    "last_open_file": "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
+    "last_directory": "/Users/flowgirl/Documents/FolderHackingAnalysis",
+    "last_export_directory": null,
+    "last_screen": "dashboard"
+  },
+  "settings": {
+    "theme": "auto",
+    "max_recent_files": 10,
+    "auto_save": true,
+    "auto_load_last_file": false,
+    "console_log_level": "INFO",
+    "file_log_level": "DEBUG",
+    "show_tooltips": true,
+    "confirm_on_exit": true
+  },
+  "analysis": {
+    "default_parameters": {}
+  },
+  "fractal": {
+    "default_parameters": {}
+  }
+}
