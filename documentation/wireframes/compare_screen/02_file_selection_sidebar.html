@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - File Selection Sidebar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .sidebar-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 280px;
+            height: 600px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            overflow: hidden;
+        }
+        .section-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #4a6380;
+        }
+        .action-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .file-list {
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #4a6380;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .file-item {
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #34495e;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .file-item.selected {
+            background-color: #3498db;
+        }
+        .file-icon {
+            margin-right: 8px;
+            color: #3498db;
+        }
+        .file-name {
+            flex-grow: 1;
+            font-size: 0.9em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .group-section {
+            margin-top: 20px;
+        }
+        .group-label {
+            font-size: 0.9em;
+            color: #bdc3c7;
+            margin-bottom: 5px;
+        }
+        .group-item {
+            padding: 8px;
+            background-color: #34495e;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .group-item.selected {
+            background-color: #9b59b6;
+        }
+        .group-badge {
+            float: right;
+            background-color: #9b59b6;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.8em;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .checkbox {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #bdc3c7;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .checkbox.checked {
+            background-color: #3498db;
+            position: relative;
+        }
+        .checkbox.checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: -2px;
+            left: 3px;
+        }
+        .filter-box {
+            padding: 8px;
+            background-color: #34495e;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .filter-box label {
+            font-size: 0.9em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filter-box select {
+            width: 100%;
+            padding: 5px;
+            background-color: #2c3e50;
+            color: white;
+            border: 1px solid #4a6380;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - File Selection Sidebar</h1>
+    <p class="description">This wireframe shows the file selection sidebar for the Compare screen. It allows users to add files, organize them into groups, and filter based on different criteria.</p>
+    
+    <div class="wireframe-container">
+        <div class="sidebar-frame">
+            <div class="section-header">File Selection</div>
+            
+            <!-- Add Files Button -->
+            <div class="action-button">Add Pawprint Files</div>
+            
+            <!-- Filter Options -->
+            <div class="filter-box">
+                <label>Group by:</label>
+                <select>
+                    <option>Origin</option>
+                    <option>Creation Date</option>
+                    <option>Pattern Score</option>
+                </select>
+            </div>
+            
+            <!-- Selected Files List -->
+            <div class="section-header">Selected Files</div>
+            <div class="file-list">
+                <div class="file-item selected">
+                    <div class="checkbox checked"></div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">system_pawprint_2025-06-01.json</div>
+                </div>
+                <div class="file-item selected">
+                    <div class="checkbox checked"></div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">system_pawprint_2025-06-02.json</div>
+                </div>
+                <div class="file-item">
+                    <div class="checkbox"></div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">documents_pawprint.json</div>
+                </div>
+                <div class="file-item selected">
+                    <div class="checkbox checked"></div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">applications_pawprint.json</div>
+                </div>
+                <div class="file-item">
+                    <div class="checkbox"></div>
+                    <div class="file-icon">📄</div>
+                    <div class="file-name">downloads_pawprint.json</div>
+                </div>
+            </div>
+            
+            <!-- Origin Groups -->
+            <div class="group-section">
+                <div class="section-header">Origin Groups</div>
+                <div class="group-label">Files grouped by source directory</div>
+                <div class="group-item selected">
+                    /System <span class="group-badge">2</span>
+                </div>
+                <div class="group-item">
+                    /Applications <span class="group-badge">1</span>
+                </div>
+                <div class="group-item">
+                    /Users/flowgirl/Documents <span class="group-badge">1</span>
+                </div>
+                <div class="group-item">
+                    /Users/flowgirl/Downloads <span class="group-badge">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li>File selection with checkboxes for multi-select</li>
+            <li>Automatic grouping of files by origin directory</li>
+            <li>Filter options for different grouping criteria</li>
+            <li>Visual badges showing file count per group</li>
+            <li>Selected group highlighting for focused comparison</li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

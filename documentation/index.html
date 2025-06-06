@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting V2 Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8e44ad;
+        }
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8e44ad;
+        }
+        .container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+        }
+        .card-body {
+            padding: 15px;
+        }
+        .card-body ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .card-body li {
+            margin-bottom: 8px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .note {
+            background-color: #f8f4fc;
+            border-left: 4px solid #9b59b6;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pawprinting V2 Documentation</h1>
+        <div class="logo">
+            <div class="logo-text">AIMF LLC</div>
+        </div>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="container">
+        <h2>Documentation Overview</h2>
+        <p>Welcome to the Pawprinting V2 documentation. This guide provides comprehensive information about the application's architecture, data flow, UI components, and workflows. Use the links below to navigate to specific documentation sections.</p>
+        
+        <div class="note">
+            <p><strong>Note:</strong> This documentation covers version 2.0 of the Pawprinting application, which includes enhanced UI components, improved chart visualizations with descriptions, and advanced pawprint comparison functionality.</p>
+        </div>
+    </div>
+
+    <div class="card-grid">
+        <!-- Application Flow -->
+        <div class="card">
+            <div class="card-header">Application Architecture</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="diagrams/main_application_flow.html">Main Application Flow</a> - Overview of screens and navigation paths</li>
+                </ul>
+                <p>Learn about the overall structure and navigation flow of the application.</p>
+            </div>
+        </div>
+        
+        <!-- UI Components -->
+        <div class="card">
+            <div class="card-header">UI Components</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="ui_components/analyze_screen_components.html">Analyze Screen Components</a> - Detailed UI layout</li>
+                    <li><a href="ui_components/chart_types_reference.html">Chart Types Reference</a> - Visualization options</li>
+                </ul>
+                <p>Detailed information about interface elements and visualizations.</p>
+            </div>
+        </div>
+        
+        <!-- Data Flow -->
+        <div class="card">
+            <div class="card-header">Data Flow</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="data_flow/pawprinting_data_flow.html">Pawprinting Data Flow</a> - How data moves through the application</li>
+                </ul>
+                <p>Understand how data is processed, transformed, and visualized in the application.</p>
+            </div>
+        </div>
+        
+        <!-- Workflows -->
+        <div class="card">
+            <div class="card-header">User Workflows</div>
+            <div class="card-body">
+                <ul>
+                    <li><a href="workflows/comparison_workflow.html">Comparison Workflow</a> - How to compare multiple pawprints</li>
+                </ul>
+                <p>Step-by-step guides for performing key tasks in the application.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Additional Resources</h2>
+        <p>For more information about using the Pawprinting application, refer to these resources:</p>
+        <ul>
+            <li>Project GitHub repository (internal)</li>
+            <li>Known issues and troubleshooting guide</li>
+            <li>Development roadmap for future versions</li>
+        </ul>
+        
+        <h3>Getting Help</h3>
+        <p>If you encounter any issues or have questions about using the Pawprinting application, please contact the development team.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 AIMF LLC - All Rights Reserved</p>
+        <p>Pawprinting V2 Documentation - Version 2.0.0</p>
+    </footer>
+</body>
+</html>

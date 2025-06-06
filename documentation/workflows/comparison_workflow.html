@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprint Comparison Workflow</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .workflow-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .workflow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .step-box {
+            border: 2px solid #9b59b6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            background-color: #f5eef8;
+            width: 250px;
+            position: relative;
+        }
+        .user-action {
+            border: 2px solid #3498db;
+            background-color: #ebf5fb;
+        }
+        .system-process {
+            border: 2px solid #2ecc71;
+            background-color: #e9f7ef;
+        }
+        .decision {
+            border: 2px solid #e74c3c;
+            background-color: #fdedec;
+            width: 280px;
+        }
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background-color: #9b59b6;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .user-action .step-number {
+            background-color: #3498db;
+        }
+        .system-process .step-number {
+            background-color: #2ecc71;
+        }
+        .decision .step-number {
+            background-color: #e74c3c;
+        }
+        .arrow {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            position: relative;
+        }
+        .arrow::before {
+            content: "↓";
+            font-size: 24px;
+        }
+        .arrow-label {
+            position: absolute;
+            right: -120px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            width: 110px;
+            text-align: left;
+        }
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin: 10px 0;
+            position: relative;
+        }
+        .flow-row .arrow-horizontal {
+            position: absolute;
+            top: 50%;
+            left: calc(50% - 20px);
+            transform: translateY(-50%);
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flow-row .arrow-horizontal::before {
+            content: "→";
+            font-size: 24px;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .screenshot-placeholder {
+            border: 1px solid #ddd;
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pawprint Comparison Workflow</h1>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="workflow-container">
+        <h2>User Workflow for Comparing Pawprints</h2>
+        
+        <div class="workflow">
+            <!-- Step 1 -->
+            <div class="step-box user-action">
+                <div class="step-number">1</div>
+                <strong>User clicks "Compare Pawprints"</strong>
+                <div class="note">From Analyze screen navigation bar</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Triggers dialog</div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step-box system-process">
+                <div class="step-number">2</div>
+                <strong>System displays file selection dialog</strong>
+                <div class="note">Native macOS file picker</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">User interaction</div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step-box user-action">
+                <div class="step-number">3</div>
+                <strong>User selects multiple pawprint files</strong>
+                <div class="note">At least two files must be selected</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">File paths</div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step-box system-process">
+                <div class="step-number">4</div>
+                <strong>System loads and processes files</strong>
+                <div class="note">Parses JSON data and extracts metadata</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Data validation</div>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="step-box decision">
+                <div class="step-number">5</div>
+                <strong>System groups files by common origin</strong>
+                <div class="note">Files from same source are grouped for meaningful comparison</div>
+            </div>
+            <div class="arrow"></div>
+            
+            <!-- Step 6 -->
+            <div class="step-box system-process">
+                <div class="step-number">6</div>
+                <strong>System creates comparison view</strong>
+                <div class="note">Tab-based interface with origin grouping</div>
+            </div>
+            <div class="arrow"></div>
+            
+            <!-- Step 7 -->
+            <div class="flow-row">
+                <div class="step-box user-action" style="margin-right: 70px;">
+                    <div class="step-number">7</div>
+                    <strong>User selects an origin group</strong>
+                    <div class="note">Views files from same source</div>
+                </div>
+                <div class="arrow-horizontal"></div>
+                <div class="step-box system-process" style="margin-left: 70px;">
+                    <div class="step-number">8</div>
+                    <strong>System shows detailed comparison</strong>
+                    <div class="note">Shows differences in dialog</div>
+                </div>
+            </div>
+            <div class="arrow"></div>
+            
+            <!-- Step 9 -->
+            <div class="flow-row">
+                <div class="step-box user-action" style="margin-right: 70px;">
+                    <div class="step-number">9</div>
+                    <strong>User clicks "Export"</strong>
+                    <div class="note">To save comparison results</div>
+                </div>
+                <div class="arrow-horizontal"></div>
+                <div class="step-box system-process" style="margin-left: 70px;">
+                    <div class="step-number">10</div>
+                    <strong>System saves HTML report</strong>
+                    <div class="note">Creates shareable document</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="workflow-container">
+        <h2>Origin-Based Comparison Logic</h2>
+        
+        <h3>Why Group by Origin?</h3>
+        <p>Comparing pawprints from the same origin (source directory) offers more meaningful insights:</p>
+        <ul>
+            <li>Files from the same directory structure have contextual relevance</li>
+            <li>Changes over time in the same directory are more significant</li>
+            <li>Pattern differences in the same structure reveal important insights</li>
+            <li>Reduces noise from comparing completely unrelated directories</li>
+        </ul>
+        
+        <h3>Grouping Algorithm</h3>
+        <div class="code-block">
+# Pseudocode for origin grouping
+def group_pawprints_by_origin(pawprint_files):
+    origin_groups = {}
+    
+    for file_path in pawprint_files:
+        # Load JSON data
+        data = load_json(file_path)
+        
+        # Extract origin from metadata
+        if 'metadata' in data and 'origin' in data['metadata']:
+            origin = data['metadata']['origin']
+            
+            # Add to appropriate group
+            if origin not in origin_groups:
+                origin_groups[origin] = []
+            
+            origin_groups[origin].append({
+                'file_path': file_path,
+                'data': data
+            })
+    
+    # Only return groups with multiple files
+    return {k: v for k, v in origin_groups.items() if len(v) > 1}
+        </div>
+        
+        <h3>Comparison Process</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>Process</th>
+                    <th>Output</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. Load Files</td>
+                    <td>Parse JSON data for all selected files</td>
+                    <td>In-memory data structures</td>
+                </tr>
+                <tr>
+                    <td>2. Extract Origins</td>
+                    <td>Read 'origin' field from metadata section</td>
+                    <td>Origin → Files mapping</td>
+                </tr>
+                <tr>
+                    <td>3. Group Files</td>
+                    <td>Create collections of files with same origin</td>
+                    <td>Origin-based file groups</td>
+                </tr>
+                <tr>
+                    <td>4. Compare Structure</td>
+                    <td>Deep comparison of directory structure</td>
+                    <td>Structural differences</td>
+                </tr>
+                <tr>
+                    <td>5. Compare Patterns</td>
+                    <td>Compare detected patterns and scores</td>
+                    <td>Pattern differences</td>
+                </tr>
+                <tr>
+                    <td>6. Generate HTML</td>
+                    <td>Format differences as HTML with syntax highlighting</td>
+                    <td>Visual diff report</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="workflow-container">
+        <h2>UI Components for Comparison</h2>
+        
+        <h3>Overview Tab</h3>
+        <p>The comparison view features multiple UI components organized in a tab interface:</p>
+        <ul>
+            <li><strong>Overview Tab:</strong> Shows origin grouping and file listings</li>
+            <li><strong>Origin Group Buttons:</strong> One button per common origin with multiple files</li>
+            <li><strong>All Files List:</strong> Complete listing of all selected files</li>
+        </ul>
+        
+        <div class="screenshot-placeholder">
+            [Overview Tab Screenshot - Shows origin grouping with buttons and file listing]
+        </div>
+        
+        <h3>Detailed Comparison Dialog</h3>
+        <p>When an origin group is selected, a detailed comparison dialog appears:</p>
+        <ul>
+            <li><strong>Differences Tab:</strong> Shows all differences between files with highlighting</li>
+            <li><strong>File-Specific Tabs:</strong> One tab per file showing complete JSON content</li>
+            <li><strong>Export Button:</strong> Allows saving the comparison as HTML</li>
+        </ul>
+        
+        <div class="screenshot-placeholder">
+            [Comparison Dialog Screenshot - Shows differences tab with highlighted variances]
+        </div>
+        
+        <h3>HTML Export Format</h3>
+        <p>The exported HTML report includes:</p>
+        <ul>
+            <li>AIMF LLC branding and logo</li>
+            <li>Summary information about compared files</li>
+            <li>Color-coded differences with file origins</li>
+            <li>Complete JSON data for each file in collapsible sections</li>
+            <li>Timestamp and origin metadata</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

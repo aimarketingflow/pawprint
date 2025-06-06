@@ -65,19 +65,21 @@ class GenerateScreen(QWidget):
         """Set up the generate screen UI components"""
         # Main layout
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 15, 20, 15)  # Moderate margins
-        layout.setSpacing(10)  # Moderate spacing
+        layout.setContentsMargins(20, 10, 20, 10)  # Reduced margins
+        layout.setSpacing(8)  # Reduced spacing
         
         # Title
         title_label = QLabel("Generate Pawprint", self)
-        title_label.setStyleSheet("font-size: 24px; font-weight: bold;")
+        title_label.setStyleSheet("font-size: 22px; font-weight: bold;")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setFixedHeight(35)  # Fixed height for title
         layout.addWidget(title_label)
         
         # Source section
         source_group = QGroupBox("Source", self)
         source_layout = QVBoxLayout(source_group)
-        source_layout.setSpacing(8)  # Moderate internal spacing
+        source_layout.setContentsMargins(10, 8, 10, 8)  # Reduced margins
+        source_layout.setSpacing(6)  # Reduced internal spacing
         
         self.source_input = QLineEdit(self)
         self.source_input.setReadOnly(True)
@@ -100,7 +102,8 @@ class GenerateScreen(QWidget):
         # Options section
         options_group = QGroupBox("Generation Options", self)
         options_layout = QFormLayout(options_group)
-        options_layout.setVerticalSpacing(8)  # Moderate vertical spacing
+        options_layout.setContentsMargins(10, 8, 10, 8)  # Reduced margins
+        options_layout.setVerticalSpacing(6)  # Reduced vertical spacing
         
         # Sampling method
         self.sampling_combo = QComboBox(self)
@@ -158,7 +161,8 @@ class GenerateScreen(QWidget):
         # Output file selection
         output_group = QGroupBox("Output", self)
         output_layout = QFormLayout(output_group)
-        output_layout.setVerticalSpacing(8)  # Moderate vertical spacing
+        output_layout.setContentsMargins(10, 8, 10, 8)  # Reduced margins
+        output_layout.setVerticalSpacing(6)  # Reduced vertical spacing
         
         self.output_input = QLineEdit(self)
         self.output_input.setPlaceholderText("Select output file...")
@@ -177,7 +181,29 @@ class GenerateScreen(QWidget):
         # Progress section
         progress_group = QGroupBox("Progress", self)
         progress_layout = QVBoxLayout(progress_group)
-        progress_layout.setSpacing(8)  # Moderate vertical spacing
+        progress_layout.setContentsMargins(10, 8, 10, 8)  # Reduced margins
+        progress_layout.setSpacing(6)  # Reduced vertical spacing
+        
+        # Add Start button with neon purple styling
+        self.start_button = QPushButton("Start", self)
+        self.start_button.setStyleSheet("""
+            QPushButton {
+                background-color: #9b59b6; /* Neon purple */
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                border-radius: 5px;
+                padding: 5px;
+            }
+            QPushButton:hover {
+                background-color: #a569bd;
+            }
+            QPushButton:pressed {
+                background-color: #8e44ad;
+            }
+        """)
+        self.start_button.clicked.connect(self.on_generate_clicked)  # Connect to same handler as Generate button
+        progress_layout.addWidget(self.start_button)
         
         self.progress_bar = QProgressBar(self)
         self.progress_bar.setRange(0, 100)
@@ -221,10 +247,9 @@ class GenerateScreen(QWidget):
         self.generate_button.clicked.connect(self.on_generate_clicked)
         button_layout.addWidget(self.generate_button)
         
-        # Add button layout to main layout with proper spacing
-        layout.addSpacing(15)  # Add space above the buttons
+        # Add button layout to main layout with minimal spacing
+        layout.addSpacing(5)  # Reduced space above buttons
         layout.addLayout(button_layout)
-        layout.addSpacing(10)  # Add space below the buttons
     
     def connect_signals(self):
         """Connect signals to slots"""

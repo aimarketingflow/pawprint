@@ -81,6 +81,10 @@ class PawprintVisualizerWidget(QWidget):
     def setup_ui(self):
         """Set up the UI components"""
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(10, 10, 10, 20)  # Extra bottom margin
+        
+        # Chart type selection and comparison controls
+        top_controls = QHBoxLayout()
         
         # Chart type selection
         chart_type_layout = QHBoxLayout()
@@ -100,7 +104,10 @@ class PawprintVisualizerWidget(QWidget):
         options_button.clicked.connect(self.on_options_clicked)
         chart_type_layout.addWidget(options_button)
         
-        layout.addLayout(chart_type_layout)
+
+        
+        top_controls.addLayout(chart_type_layout)
+        layout.addLayout(top_controls)
         
         # Plot area
         if MATPLOTLIB_AVAILABLE:
@@ -108,6 +115,25 @@ class PawprintVisualizerWidget(QWidget):
             self.toolbar = NavigationToolbar(self.canvas, self)
             layout.addWidget(self.toolbar)
             layout.addWidget(self.canvas)
+            
+            # Add chart description box
+            description_group = QGroupBox("Chart Description", self)
+            description_layout = QVBoxLayout(description_group)
+            
+            self.chart_description = QTextEdit(self)
+            self.chart_description.setReadOnly(True)
+            self.chart_description.setFixedHeight(100)  # Fixed height to save space
+            self.chart_description.setStyleSheet("""
+                QTextEdit {
+                    background-color: #f8f9fa;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+            """)
+            description_layout.addWidget(self.chart_description)
+            
+            layout.addWidget(description_group)
         else:
             # Fallback if matplotlib not available
             fallback_widget = QLabel(
@@ -142,17 +168,27 @@ class PawprintVisualizerWidget(QWidget):
         # Create a placeholder plot based on chart type
         if chart_type == "Time Series":
             self._create_time_series_plot()
+            self._set_description("Time Series shows patterns over time. Higher values indicate stronger pattern detection. Look for peaks and trends that may indicate significant events or patterns.")
         elif chart_type == "Distribution":
             self._create_distribution_plot()
+            self._set_description("Distribution shows the frequency of different values. Look for unusual peaks or gaps which may indicate anomalies or patterns in the data.")
         elif chart_type == "Heatmap":
             self._create_heatmap_plot()
+            self._set_description("Heatmap displays relationships between different data points. Darker colors indicate stronger correlations. Look for clusters that might identify related components.")
         elif chart_type == "Network Graph":
             self._create_network_plot()
+            self._set_description("Network Graph shows connections between entities. Larger nodes indicate more connections. Look for central nodes and dense connection clusters that may reveal key interaction points.")
         elif chart_type == "Fractal View":
             self._create_fractal_view()
+            self._set_description("Fractal View visualizes self-similar patterns in the data. Similar colors and patterns indicate related behaviors. Look for repeating structures that might indicate recursive or nested behaviors.")
         
         # Update the canvas
         self.canvas.draw()
+        
+    def _set_description(self, text):
+        """Set the chart description text"""
+        if hasattr(self, 'chart_description'):
+            self.chart_description.setText(text)
     
     def set_data(self, data):
         """Set data for visualization"""
@@ -606,19 +642,61 @@ class AnalyzeScreen(QWidget):
         """Set up the analyze screen UI components"""
         # Main layout
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 15, 20, 15)  # Moderate margins
-        layout.setSpacing(10)  # Moderate spacing
+        layout.setContentsMargins(20, 10, 20, 10)  # Reduced margins
+        layout.setSpacing(8)  # Reduced spacing
         
-        # Title
+        # Navigation bar at top
+        nav_layout = QHBoxLayout()
+        nav_layout.setContentsMargins(0, 0, 0, 5)
+        
+        self.nav_back_button = QPushButton("◀ Back", self)
+        self.nav_back_button.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db; /* Neon blue */
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+                padding: 5px 10px;
+                min-width: 80px;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+        """)
+        self.nav_back_button.clicked.connect(self.on_back_clicked)
+        nav_layout.addWidget(self.nav_back_button)
+        
+        # Title - centered
         title_label = QLabel("Analyze Pawprint", self)
-        title_label.setStyleSheet("font-size: 22px; font-weight: bold;")  # Slightly smaller font
+        title_label.setStyleSheet("font-size: 22px; font-weight: bold;")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(title_label)
+        title_label.setFixedHeight(35)  # Fixed height for title
+        nav_layout.addWidget(title_label, 1)  # Give title stretch factor for centering
+        
+        # Home button
+        self.nav_home_button = QPushButton("Home", self)
+        self.nav_home_button.setStyleSheet("""
+            QPushButton {
+                background-color: #2ecc71; /* Green */
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+                padding: 5px 10px;
+                min-width: 80px;
+            }
+            QPushButton:hover {
+                background-color: #27ae60;
+            }
+        """)
+        self.nav_home_button.clicked.connect(self.on_back_clicked)  # Uses same handler
+        nav_layout.addWidget(self.nav_home_button)
+        
+        layout.addLayout(nav_layout)
         
         # File selection
         file_group = QGroupBox("Pawprint File", self)
         file_layout = QHBoxLayout(file_group)
-        file_layout.setContentsMargins(10, 10, 10, 10)  # Standard internal margins
+        file_layout.setContentsMargins(10, 8, 10, 8)  # Reduced internal margins
         
         self.file_input = QLineEdit(self)
         self.file_input.setReadOnly(True)
@@ -663,13 +741,53 @@ class AnalyzeScreen(QWidget):
         
         layout.addLayout(status_layout)
         
-        # Button section
+        # Button section - make buttons more visible and add neon blue Back button at bottom
         button_layout = QHBoxLayout()
-        button_layout.setContentsMargins(5, 5, 5, 5)  # Standard margins
+        button_layout.setContentsMargins(5, 0, 5, 0)  # Minimal margins
         
+        # Create a prominent Back button with neon blue styling
         self.back_button = QPushButton("Back", self)
+        self.back_button.setMinimumWidth(120)
+        self.back_button.setMinimumHeight(40)
+        self.back_button.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db; /* Neon blue */
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+            QPushButton:pressed {
+                background-color: #1c6ea4;
+            }
+        """)
         self.back_button.clicked.connect(self.on_back_clicked)
         button_layout.addWidget(self.back_button)
+        
+        # Add permanent Compare button that's always visible
+        self.compare_button = QPushButton("🔍 Compare Pawprints", self)
+        self.compare_button.setMinimumWidth(180)
+        self.compare_button.setMinimumHeight(40)
+        self.compare_button.setStyleSheet("""
+            QPushButton {
+                background-color: #9b59b6; /* Purple */
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #8e44ad;
+            }
+            QPushButton:pressed {
+                background-color: #7d3c98;
+            }
+        """)
+        self.compare_button.clicked.connect(self.select_files_for_comparison)
+        button_layout.addWidget(self.compare_button)
         
         button_layout.addStretch(1)
         
@@ -1014,46 +1132,46 @@ class AnalyzeScreen(QWidget):
             NotificationManager.show_warning("At least two files are required for comparison")
             return False
             
-        # Check if files exist
-        valid_paths = []
-        for path in file_paths:
-            if os.path.exists(path):
-                valid_paths.append(path)
-            else:
-                NotificationManager.show_warning(f"File not found: {path}")
-                
-        if len(valid_paths) < 2:
-            NotificationManager.show_warning("At least two valid files are required for comparison")
-            return False
-            
-        # Load pawprint data from files
+        # Try to load all pawprint files
         comparison_data = []
         file_names = []
+        metadata_origins = []
         
-        for path in valid_paths:
+        for file_path in file_paths:
             try:
-                with open(path, 'r') as f:
+                with open(file_path, 'r') as f:
                     data = json.load(f)
                     comparison_data.append(data)
-                    file_names.append(os.path.basename(path))
+                    file_names.append(os.path.basename(file_path))
+                    
+                    # Extract origin metadata if available
+                    if 'metadata' in data and 'origin' in data['metadata']:
+                        metadata_origins.append(data['metadata']['origin'])
+                    else:
+                        metadata_origins.append('Unknown')
             except Exception as e:
-                logger.error(f"Error loading file {path}: {e}")
-                NotificationManager.show_error(f"Error loading file {os.path.basename(path)}: {e}")
-                
-        if len(comparison_data) < 2:
-            NotificationManager.show_warning("Failed to load enough files for comparison")
-            return False
-            
-        # Display comparison UI
-        self._setup_comparison_view(file_names, comparison_data)
-        return True
+                logger.error(f"Error loading pawprint file {file_path}: {str(e)}")
+                NotificationManager.show_error(f"Error loading pawprint file: {str(e)}")
+                return False
         
-    def _setup_comparison_view(self, file_names, comparison_data):
+        # Group files by origin for easier comparison
+        origin_groups = {}
+        for i, origin in enumerate(metadata_origins):
+            if origin not in origin_groups:
+                origin_groups[origin] = []
+            origin_groups[origin].append((file_names[i], file_paths[i], comparison_data[i]))
+                
+        # Set up comparison view
+        self._setup_comparison_view(file_names, comparison_data, origin_groups)
+        return True
+    
+    def _setup_comparison_view(self, file_names, comparison_data, origin_groups=None):
         """Set up the comparison view UI with tabs for overview, individual files, and differences
         
         Args:
             file_names: List of file names being compared
             comparison_data: List of pawprint data dictionaries to compare
+            origin_groups: Dictionary of files grouped by origin metadata
         """
         # Clear current view
         self.clear_ui()
@@ -1069,28 +1187,63 @@ class AnalyzeScreen(QWidget):
         self.comparison_container = QWidget()
         comparison_layout = QVBoxLayout(self.comparison_container)
         
-        # Create tab widget for comparison views
-        tab_widget = QTabWidget()
+        # Create tab widget for comparison
+        self.comparison_tabs = QTabWidget()
+        self.layout().addWidget(self.comparison_tabs)
         
-        # Add the overview tab
-        overview_tab = QWidget()
-        overview_layout = QVBoxLayout(overview_tab)
+        # Overview tab
+        overview_widget = QWidget()
+        overview_layout = QVBoxLayout(overview_widget)
         
-        # Add a header and description
-        header_label = QLabel(f"<h1>Comparison of {len(file_names)} Pawprint Files</h1>")
-        header_label.setTextFormat(Qt.TextFormat.RichText)
-        overview_layout.addWidget(header_label)
+        # Add title
+        title = QLabel(f"Comparing {len(file_names)} Pawprint Files", overview_widget)
+        title.setStyleSheet("font-size: 18px; font-weight: bold;")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        overview_layout.addWidget(title)
         
-        # Add file names being compared
-        files_label = QLabel("<h3>Files being compared:</h3>")
-        files_label.setTextFormat(Qt.TextFormat.RichText)
-        overview_layout.addWidget(files_label)
+        # Origin group section (if available)
+        if origin_groups and len(origin_groups) > 1:
+            origin_group_box = QGroupBox("Files by Origin", overview_widget)
+            origin_group_layout = QVBoxLayout(origin_group_box)
+            
+            origin_label = QLabel("Select pawprints from the same origin to compare:")
+            origin_label.setStyleSheet("font-weight: bold;")
+            origin_group_layout.addWidget(origin_label)
+            
+            # Create group list
+            for origin, files in origin_groups.items():
+                if len(files) >= 2:  # Only show origins with multiple files
+                    origin_button = QPushButton(f"{origin} ({len(files)} files)")
+                    origin_button.setStyleSheet("""
+                        QPushButton {
+                            background-color: #9b59b6; /* Purple */
+                            color: white;
+                            font-weight: bold;
+                            border-radius: 5px;
+                            padding: 8px;
+                            text-align: left;
+                        }
+                        QPushButton:hover {
+                            background-color: #8e44ad;
+                        }
+                    """)
+                    # Use lambda with default argument to capture the current origin value
+                    origin_button.clicked.connect(lambda checked=False, o=origin: self._show_origin_comparison(o, origin_groups[o]))
+                    origin_group_layout.addWidget(origin_button)
+                    
+            if origin_group_layout.count() > 1:  # Only add if we have origins with multiple files
+                overview_layout.addWidget(origin_group_box)
+        
+        # All files list
+        files_group = QGroupBox("All Files Being Compared", overview_widget)
+        files_layout = QVBoxLayout(files_group)
         
         files_list = QListWidget()
         for name in file_names:
             files_list.addItem(name)
-        files_list.setMaximumHeight(100)
-        overview_layout.addWidget(files_list)
+        files_list.setMaximumHeight(150)
+        files_layout.addWidget(files_list)
+        overview_layout.addWidget(files_group)
         
         # Calculate comparison metrics
         metrics = self._calculate_comparison_metrics(comparison_data)
@@ -1600,14 +1753,135 @@ class AnalyzeScreen(QWidget):
             
         return html
     
+    def _show_origin_comparison(self, origin, files):
+        """Show comparison view for files from the same origin
+        
+        Args:
+            origin: The origin metadata value
+            files: List of (filename, filepath, data) tuples for files with the same origin
+        """
+        # Create a new dialog for this comparison
+        dialog = QDialog(self)
+        dialog.setWindowTitle(f"Pawprint Comparison - {origin}")
+        dialog.setMinimumSize(900, 700)
+        
+        # Set up dialog layout
+        layout = QVBoxLayout(dialog)
+        
+        # Add header
+        header = QLabel(f"Comparing {len(files)} Pawprints from Origin: {origin}")
+        header.setStyleSheet("font-size: 18px; font-weight: bold;")
+        header.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(header)
+        
+        # Create tab widget for the different files
+        tab_widget = QTabWidget()
+        layout.addWidget(tab_widget)
+        
+        # Overview tab showing differences
+        overview_tab = QWidget()
+        overview_layout = QVBoxLayout(overview_tab)
+        
+        # Extract just the data and file names
+        comparison_file_names = [f[0] for f in files]
+        comparison_data = [f[2] for f in files]
+        
+        # Find common and different keys
+        common_keys = self._find_common_keys(comparison_data)
+        different_keys = self._find_different_keys(comparison_data, common_keys)
+        
+        # Create HTML diff view
+        diff_html = self._generate_diff_html(comparison_file_names, comparison_data, common_keys, different_keys)
+        
+        diff_view = QTextEdit()
+        diff_view.setReadOnly(True)
+        diff_view.setHtml(diff_html)
+        overview_layout.addWidget(diff_view)
+        
+        # Add overview tab
+        tab_widget.addTab(overview_tab, "Differences")
+        
+        # Add individual file tabs
+        for i, (filename, filepath, data) in enumerate(files):
+            file_tab = QWidget()
+            file_layout = QVBoxLayout(file_tab)
+            
+            # Add file info
+            file_info = QLabel(f"File: {filepath}")
+            file_info.setWordWrap(True)
+            file_layout.addWidget(file_info)
+            
+            # Create JSON viewer
+            json_viewer = JsonViewerWidget()
+            json_viewer.set_data(data)
+            file_layout.addWidget(json_viewer)
+            
+            tab_widget.addTab(file_tab, filename)
+        
+        # Add export button
+        export_button = QPushButton("Export Comparison Report")
+        export_button.setMinimumHeight(40)
+        export_button.setStyleSheet("""
+            QPushButton {
+                background-color: #2ecc71;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #27ae60;
+            }
+        """)
+        export_button.clicked.connect(lambda: self._export_origin_comparison(origin, comparison_file_names, comparison_data))
+        layout.addWidget(export_button)
+        
+        dialog.exec()
+    
+    def _export_origin_comparison(self, origin, file_names, comparison_data):
+        """Export comparison report for files with the same origin
+        
+        Args:
+            origin: The origin metadata value
+            file_names: List of file names being compared
+            comparison_data: List of pawprint data dictionaries
+        """
+        # Calculate metrics
+        metrics = self._calculate_comparison_metrics(comparison_data)
+        
+        # Generate HTML report
+        html_report = self._generate_comparison_report_html(file_names, comparison_data, metrics)
+        
+        # Save dialog
+        options = QFileDialog.Options()
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Comparison Report",
+            f"Pawprint_Comparison_{origin}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html",
+            "HTML Files (*.html);;All Files (*)",
+            options=options
+        )
+        
+        if file_path:
+            try:
+                with open(file_path, 'w') as f:
+                    f.write(html_report)
+                NotificationManager.show_info(f"Report saved to {file_path}")
+            except Exception as e:
+                logger.error(f"Error saving comparison report: {str(e)}")
+                NotificationManager.show_error(f"Error saving report: {str(e)}")
+    
     def exit_comparison_mode(self):
         """Exit comparison mode and restore the original UI"""
-        # Restore the original UI
+        # Clear comparison data
+        self.current_comparison = None
+        
+        # Restore original view
         self.clear_ui()
         self.setup_ui()
-            
-        # Reset the window title
-        if hasattr(self.main_window, "setWindowTitle"):
+        
+        # If a file was previously loaded, reload it
+        if self.current_file_path:
+            self.load_pawprint_file(self.current_file_path)
             self.main_window.setWindowTitle("Pawprinting - Analyze")
                 
         logger.info("Exited comparison mode")

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting Chart Types Reference</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        .chart-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+        .chart-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .chart-header {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .chart-body {
+            padding: 20px;
+        }
+        .chart-image {
+            width: 100%;
+            height: 250px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+        }
+        .chart-description {
+            margin-bottom: 15px;
+        }
+        .interpretation {
+            background-color: #ebf5fb;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .use-cases {
+            background-color: #e8f8f5;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        .chart-type-time {
+            background-color: #3498db;
+        }
+        .chart-type-dist {
+            background-color: #9b59b6;
+        }
+        .chart-type-heat {
+            background-color: #e74c3c;
+        }
+        .chart-type-network {
+            background-color: #2ecc71;
+        }
+        .chart-type-fractal {
+            background-color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pawprinting Chart Types Reference</h1>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="chart-container">
+        <h2>Overview of Available Charts</h2>
+        <p>The Pawprinting application offers various chart types to visualize directory structure patterns. Each chart type highlights different aspects of the pawprint data, allowing for comprehensive analysis.</p>
+        
+        <div class="chart-grid">
+            <!-- Time Series Chart -->
+            <div class="chart-card">
+                <div class="chart-header chart-type-time">Time Series</div>
+                <div class="chart-body">
+                    <div class="chart-image">[Time Series Visualization]</div>
+                    <div class="chart-description">
+                        <p>Time Series charts display patterns over time, showing how values fluctuate across the temporal dimension of your directory structure.</p>
+                    </div>
+                    <div class="interpretation">
+                        <h3>How to Read This Chart</h3>
+                        <p>The x-axis represents time or sequence order, while the y-axis shows pattern strength. Higher peaks indicate stronger pattern detection at those points.</p>
+                        <ul>
+                            <li>Sharp peaks indicate sudden, significant pattern matches</li>
+                            <li>Plateaus suggest consistent pattern presence over time</li>
+                            <li>Valleys represent areas with lower pattern detection</li>
+                        </ul>
+                    </div>
+                    <div class="use-cases">
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Analyzing file creation/modification patterns over time</li>
+                            <li>Detecting periodic behavior in filesystem activities</li>
+                            <li>Identifying temporal anomalies in file structures</li>
+                        </ul>
+                    </div>
+                    <p class="note">Time series is most effective when analyzing directories with chronological significance.</p>
+                </div>
+            </div>
+            
+            <!-- Distribution Chart -->
+            <div class="chart-card">
+                <div class="chart-header chart-type-dist">Distribution</div>
+                <div class="chart-body">
+                    <div class="chart-image">[Distribution Visualization]</div>
+                    <div class="chart-description">
+                        <p>Distribution charts show how values are distributed across your directory structure, highlighting frequency and concentration of different patterns.</p>
+                    </div>
+                    <div class="interpretation">
+                        <h3>How to Read This Chart</h3>
+                        <p>The x-axis represents different pattern values or categories, while the y-axis shows frequency or count. Taller bars indicate more instances of that pattern.</p>
+                        <ul>
+                            <li>Bell curves suggest normal distribution of values</li>
+                            <li>Multiple peaks indicate distinct pattern groups</li>
+                            <li>Skewed distributions reveal bias toward certain patterns</li>
+                        </ul>
+                    </div>
+                    <div class="use-cases">
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Understanding file size or count distributions</li>
+                            <li>Identifying clusters of similar file types</li>
+                            <li>Detecting outliers in directory structure</li>
+                        </ul>
+                    </div>
+                    <p class="note">Distribution charts are ideal for spotting overall patterns and anomalies in large datasets.</p>
+                </div>
+            </div>
+            
+            <!-- Heatmap Chart -->
+            <div class="chart-card">
+                <div class="chart-header chart-type-heat">Heatmap</div>
+                <div class="chart-body">
+                    <div class="chart-image">[Heatmap Visualization]</div>
+                    <div class="chart-description">
+                        <p>Heatmaps display intensity of patterns across two dimensions, using color to represent a third variable such as pattern strength or occurrence frequency.</p>
+                    </div>
+                    <div class="interpretation">
+                        <h3>How to Read This Chart</h3>
+                        <p>The x and y axes represent different dimensions of your data, while color intensity shows the value or strength of patterns at each intersection.</p>
+                        <ul>
+                            <li>Darker/brighter areas indicate stronger pattern matches</li>
+                            <li>Clusters of similar colors show related pattern groups</li>
+                            <li>Color gradients reveal relationships between adjacent areas</li>
+                        </ul>
+                    </div>
+                    <div class="use-cases">
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Visualizing complex relationships between directory attributes</li>
+                            <li>Identifying hotspots of activity or pattern strength</li>
+                            <li>Comparing multiple dimensions of filesystem structure</li>
+                        </ul>
+                    </div>
+                    <p class="note">Heatmaps excel at showing complex multidimensional relationships in an intuitive way.</p>
+                </div>
+            </div>
+            
+            <!-- Network Graph -->
+            <div class="chart-card">
+                <div class="chart-header chart-type-network">Network Graph</div>
+                <div class="chart-body">
+                    <div class="chart-image">[Network Graph Visualization]</div>
+                    <div class="chart-description">
+                        <p>Network graphs show connections between directory elements, visualizing relationships and dependencies within your file structure.</p>
+                    </div>
+                    <div class="interpretation">
+                        <h3>How to Read This Chart</h3>
+                        <p>Nodes represent files or directories, while edges (lines) show relationships between them. Node size often indicates importance, and edge thickness may represent strength of connection.</p>
+                        <ul>
+                            <li>Central nodes with many connections are key structural elements</li>
+                            <li>Clusters of connected nodes show related file groups</li>
+                            <li>Isolated nodes may represent unique or unrelated elements</li>
+                        </ul>
+                    </div>
+                    <div class="use-cases">
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Mapping directory structure relationships</li>
+                            <li>Identifying critical path dependencies</li>
+                            <li>Discovering connection patterns between file types</li>
+                        </ul>
+                    </div>
+                    <p class="note">Network graphs are particularly useful for visualizing complex hierarchical structures and identifying connection patterns.</p>
+                </div>
+            </div>
+            
+            <!-- Fractal View -->
+            <div class="chart-card">
+                <div class="chart-header chart-type-fractal">Fractal View</div>
+                <div class="chart-body">
+                    <div class="chart-image">[Fractal View Visualization]</div>
+                    <div class="chart-description">
+                        <p>Fractal views represent self-similar patterns in your directory structure, highlighting recursive elements and nested relationships.</p>
+                    </div>
+                    <div class="interpretation">
+                        <h3>How to Read This Chart</h3>
+                        <p>The visualization shows nested patterns with similar structures at different scales. Colors and shapes represent different pattern types, with position indicating relationship.</p>
+                        <ul>
+                            <li>Repeating visual elements indicate self-similar structures</li>
+                            <li>Pattern density shows complexity of nested elements</li>
+                            <li>Color variations highlight different pattern types</li>
+                        </ul>
+                    </div>
+                    <div class="use-cases">
+                        <h3>When to Use</h3>
+                        <ul>
+                            <li>Analyzing deeply nested directory structures</li>
+                            <li>Identifying recursive patterns in file organization</li>
+                            <li>Visualizing self-similarity in complex hierarchies</li>
+                        </ul>
+                    </div>
+                    <p class="note">Fractal views offer unique insights into recursive patterns that might be missed in traditional charts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <h2>Chart Description Box</h2>
+        <p>The chart description box provides contextual information about each chart type, helping users interpret the visualization correctly. Below are the standard descriptions used for each chart type:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Chart Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Time Series</strong></td>
+                    <td>
+                        Time Series shows patterns over time. Higher values indicate stronger pattern detection. Look for peaks and trends that may indicate significant events or patterns. The x-axis represents the temporal dimension, while the y-axis shows pattern strength.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Distribution</strong></td>
+                    <td>
+                        Distribution shows how values are spread across your data. Bell curves indicate normal distribution, while multiple peaks suggest distinct pattern groups. The height of each bar represents frequency, helping identify common and rare patterns.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Heatmap</strong></td>
+                    <td>
+                        Heatmap displays intensity across two dimensions. Darker/brighter areas indicate stronger pattern matches. Look for clusters of similar colors to identify related pattern groups. This visualization is ideal for spotting complex relationships.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Network Graph</strong></td>
+                    <td>
+                        Network Graph shows connections between elements in your directory structure. Larger nodes are more significant, and line thickness indicates stronger connections. Look for central nodes and clusters to identify key structural elements and relationships.
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Fractal View</strong></td>
+                    <td>
+                        Fractal View shows self-similar patterns at different scales. Repeating visual elements indicate recursive structures. This visualization helps identify hidden patterns in complex, nested directory hierarchies that might be missed in traditional charts.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - Summary View</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .main-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            height: 600px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            overflow: hidden;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #4a6380;
+            margin-bottom: 15px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #9b59b6;
+            border-bottom: 3px solid #9b59b6;
+            margin-bottom: -1px;
+        }
+        .tab-content {
+            height: 520px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #34495e;
+            border-radius: 5px;
+        }
+        .summary-header {
+            padding: 15px;
+            background-color: #2c3e50;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #4a6380;
+        }
+        .summary-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .summary-subtitle {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+        .summary-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            flex: 1;
+            min-width: 150px;
+            background-color: #2c3e50;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #4a6380;
+        }
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+        .insight-section {
+            margin-bottom: 20px;
+        }
+        .insight-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #4a6380;
+        }
+        .insight-card {
+            background-color: #2c3e50;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #4a6380;
+        }
+        .insight-heading {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #e74c3c;
+            display: flex;
+            align-items: center;
+        }
+        .insight-icon {
+            margin-right: 8px;
+        }
+        .insight-text {
+            font-size: 0.9em;
+            color: #ecf0f1;
+        }
+        .insight-path {
+            font-family: monospace;
+            color: #3498db;
+            font-size: 0.9em;
+            margin-top: 8px;
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - Summary View</h1>
+    <p class="description">This wireframe shows the summary tab of the Compare screen, which provides an overview of key findings and insights from comparing pawprint files.</p>
+    
+    <div class="wireframe-container">
+        <div class="main-frame">
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <div class="tab">Comparison</div>
+                <div class="tab">Charts</div>
+                <div class="tab">Raw Data</div>
+                <div class="tab active">Summary</div>
+            </div>
+            
+            <!-- Summary Tab Content -->
+            <div class="tab-content">
+                <!-- Summary Header -->
+                <div class="summary-header">
+                    <div class="summary-title">Origin Group: /System</div>
+                    <div class="summary-subtitle">Comparison of 2 pawprints | June 1, 2025 - June 2, 2025</div>
+                </div>
+                
+                <!-- Summary Statistics -->
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">27</div>
+                        <div class="stat-label">Total Differences</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">+8.97%</div>
+                        <div class="stat-label">Pattern Score Change</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Structural Changes</div>
+                    </div>
+                </div>
+                
+                <!-- Key Insights Section -->
+                <div class="insight-section">
+                    <div class="insight-title">Key Insights</div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-heading">
+                            <span class="insight-icon">⚠️</span> Significant Pattern Score Increase
+                        </div>
+                        <div class="insight-text">
+                            Pattern 1 score increased by 9%, suggesting improved directory organization or file structure consistency since the last pawprint.
+                        </div>
+                        <div class="insight-path">patterns.pattern_1.score: 0.78 → 0.85</div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-heading">
+                            <span class="insight-icon">📈</span> Directory Size Change
+                        </div>
+                        <div class="insight-text">
+                            One directory has doubled in size since the previous pawprint, potentially indicating new content or file accumulation.
+                        </div>
+                        <div class="insight-path">directory_structure.children[3].size: 1024 → 2048</div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-heading">
+                            <span class="insight-icon">🔍</span> Increased Pattern Variance
+                        </div>
+                        <div class="insight-text">
+                            Pattern 2 shows increased variance, suggesting more diversity in file types or sizes within the structure.
+                        </div>
+                        <div class="insight-path">patterns.pattern_2.details.variance: 0.12 → 0.17</div>
+                    </div>
+                </div>
+                
+                <!-- Recommendation Section -->
+                <div class="insight-section">
+                    <div class="insight-title">Recommendations</div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-heading">
+                            <span class="insight-icon">💡</span> Investigate Directory Growth
+                        </div>
+                        <div class="insight-text">
+                            Review the contents of the growing directory to ensure the size increase is expected and not due to unwanted file accumulation.
+                        </div>
+                    </div>
+                    
+                    <div class="insight-card">
+                        <div class="insight-heading">
+                            <span class="insight-icon">💡</span> Monitor Pattern Variance
+                        </div>
+                        <div class="insight-text">
+                            Keep tracking the increasing pattern variance to ensure it represents healthy diversity rather than structural inconsistency.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Key Features:</strong></p>
+        <ul>
+            <li>At-a-glance statistics summarizing the key differences</li>
+            <li>Automatically generated insights highlighting significant changes</li>
+            <li>JSON paths linking insights to specific data points</li>
+            <li>Action-oriented recommendations based on detected changes</li>
+            <li>Visual categorization of insights with appropriate icons</li>
+            <li>Clear timeline context showing when changes occurred</li>
+        </ul>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

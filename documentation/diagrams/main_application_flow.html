@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting Application Flow</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #7d3c98;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 150px;
+        }
+        .diagram-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .flow-box {
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            background-color: #ebf5fb;
+            width: 180px;
+            position: relative;
+        }
+        .flow-arrow {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+        }
+        .flow-arrow::before {
+            content: "↓";
+            font-size: 24px;
+        }
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .screen-box {
+            border: 2px solid #9b59b6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 30px;
+            text-align: center;
+            background-color: #f5eef8;
+            width: 180px;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pawprinting Application Flow</h1>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Main Application Flow</h2>
+        <div class="flow-diagram">
+            <!-- Application Start -->
+            <div class="flow-box" style="background-color: #d6eaf8; border-color: #2874a6;">
+                <strong>Application Start</strong>
+                <div class="note">main.py initializes app</div>
+            </div>
+            <div class="flow-arrow"></div>
+            
+            <!-- Welcome Screen -->
+            <div class="flow-box" style="background-color: #ebf5fb;">
+                <strong>Welcome Screen</strong>
+                <div class="note">Entry point for users</div>
+            </div>
+            <div class="flow-arrow"></div>
+            
+            <!-- Main Action Selection -->
+            <div class="flow-row">
+                <div class="screen-box" style="background-color: #e8f8f5; border-color: #16a085;">
+                    <strong>Generate Screen</strong>
+                    <div class="note">Create new pawprints</div>
+                </div>
+                <div class="screen-box" style="background-color: #f5eef8; border-color: #8e44ad;">
+                    <strong>Analyze Screen</strong>
+                    <div class="note">View existing pawprints</div>
+                </div>
+            </div>
+            
+            <!-- Sub-flows -->
+            <div class="flow-row">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="flow-arrow"></div>
+                    <div class="flow-box" style="background-color: #e8f8f5; border-color: #16a085;">
+                        <strong>Generate Process</strong>
+                        <div class="note">Create pawprint file</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="flow-arrow"></div>
+                    <div class="flow-box" style="background-color: #f5eef8; border-color: #8e44ad;">
+                        <strong>Analysis Process</strong>
+                        <div class="note">View or compare pawprints</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="diagram-container">
+        <h2>Screen Navigation Flow</h2>
+        <p>The application consists of multiple screens with clear navigation paths between them:</p>
+        
+        <div class="flow-diagram">
+            <!-- Welcome Screen -->
+            <div class="flow-box" style="background-color: #ebf5fb; width: 220px;">
+                <strong>Welcome Screen</strong>
+                <div class="note">Main entry point</div>
+            </div>
+            
+            <!-- Arrows to child screens -->
+            <div style="display: flex; width: 100%; justify-content: center;">
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 0 50px;">
+                    <div class="flow-arrow"></div>
+                    <div class="screen-box" style="background-color: #e8f8f5; border-color: #16a085;">
+                        <strong>Generate Screen</strong>
+                        <div class="note">Create new pawprints</div>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-box" style="width: 220px; background-color: #e8f8f5; border-color: #16a085;">
+                        <strong>Generation Process</strong>
+                        <div class="note">Shows progress and results</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 0 50px;">
+                    <div class="flow-arrow"></div>
+                    <div class="screen-box" style="background-color: #f5eef8; border-color: #8e44ad;">
+                        <strong>Analyze Screen</strong>
+                        <div class="note">View existing pawprints</div>
+                    </div>
+                    <div class="flow-arrow"></div>
+                    <div style="display: flex;">
+                        <div class="flow-box" style="width: 150px; background-color: #f5eef8; border-color: #8e44ad;">
+                            <strong>Single Analysis</strong>
+                            <div class="note">Individual view</div>
+                        </div>
+                        <div class="flow-box" style="width: 150px; background-color: #f5eef8; border-color: #8e44ad;">
+                            <strong>Comparison View</strong>
+                            <div class="note">Multiple pawprints</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Back navigation -->
+            <div style="margin-top: 30px; font-style: italic; text-align: center;">
+                All screens feature "Back" navigation to return to previous screens
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

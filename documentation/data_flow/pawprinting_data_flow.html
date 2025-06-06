@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting Data Flow</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #16a085;
+        }
+        .diagram-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .data-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .data-box {
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            width: 200px;
+        }
+        .process-box {
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            background-color: #fdedec;
+            width: 200px;
+        }
+        .storage-box {
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            background-color: #e9f7ef;
+            width: 200px;
+        }
+        .arrow {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            position: relative;
+        }
+        .arrow::before {
+            content: "↓";
+            font-size: 24px;
+        }
+        .arrow-label {
+            position: absolute;
+            right: -100px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            width: 90px;
+            text-align: left;
+        }
+        .flow-row {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        .success {
+            color: #27ae60;
+        }
+        .warning {
+            color: #e67e22;
+        }
+        .error {
+            color: #e74c3c;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo img {
+            max-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Pawprinting Data Flow</h1>
+        <div class="logo">
+            <p><em>AIMF LLC</em></p>
+        </div>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="diagram-container">
+        <h2>Generate Process Data Flow</h2>
+        
+        <div class="data-flow">
+            <!-- User Input -->
+            <div class="data-box" style="background-color: #ebf5fb;">
+                <strong>User Input</strong>
+                <div class="note">Directory selection,<br>Settings configuration</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Data validation</div>
+            </div>
+            
+            <!-- Processing Engine -->
+            <div class="process-box">
+                <strong>Processing Engine</strong>
+                <div class="note">Scans directory structure,<br>Calculates patterns</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Raw pattern data</div>
+            </div>
+            
+            <!-- Pattern Detection -->
+            <div class="process-box">
+                <strong>Pattern Detection</strong>
+                <div class="note">Algorithm analyzes<br>structure & metadata</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Processed data</div>
+            </div>
+            
+            <!-- JSON Generation -->
+            <div class="data-box" style="background-color: #e8f8f5;">
+                <strong>JSON Generation</strong>
+                <div class="note">Creates structured<br>pawprint data</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">File I/O</div>
+            </div>
+            
+            <!-- File Storage -->
+            <div class="storage-box">
+                <strong>File Storage</strong>
+                <div class="note">pawprint.json</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="diagram-container">
+        <h2>Analysis Process Data Flow</h2>
+        
+        <div class="data-flow">
+            <!-- File Selection -->
+            <div class="data-box" style="background-color: #ebf5fb;">
+                <strong>File Selection</strong>
+                <div class="note">User selects pawprint file</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">File loading</div>
+            </div>
+            
+            <!-- JSON Parser -->
+            <div class="process-box">
+                <strong>JSON Parser</strong>
+                <div class="note">Deserializes JSON data</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Structured data</div>
+            </div>
+            
+            <div class="flow-row">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="process-box" style="background-color: #ebf5fb;">
+                        <strong>Visualization Engine</strong>
+                        <div class="note">Creates charts & graphs</div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="data-box" style="background-color: #ebf5fb;">
+                        <strong>Interactive Charts</strong>
+                        <div class="note">User views data visually</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="process-box" style="background-color: #ebf5fb;">
+                        <strong>Raw Data Viewer</strong>
+                        <div class="note">Shows JSON structure</div>
+                    </div>
+                    <div class="arrow"></div>
+                    <div class="data-box" style="background-color: #ebf5fb;">
+                        <strong>Text Display</strong>
+                        <div class="note">User views raw data</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="diagram-container">
+        <h2>Comparison Data Flow</h2>
+        
+        <div class="data-flow">
+            <!-- Multiple Files Selection -->
+            <div class="data-box" style="background-color: #ebf5fb;">
+                <strong>Multiple File Selection</strong>
+                <div class="note">User selects 2+ pawprint files</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Batch loading</div>
+            </div>
+            
+            <!-- Origin Detection -->
+            <div class="process-box">
+                <strong>Origin Detection</strong>
+                <div class="note">Groups files by origin metadata</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Grouped data</div>
+            </div>
+            
+            <!-- Difference Analyzer -->
+            <div class="process-box">
+                <strong>Difference Analyzer</strong>
+                <div class="note">Finds variances between files</div>
+            </div>
+            <div class="arrow">
+                <div class="arrow-label">Comparison data</div>
+            </div>
+            
+            <div class="flow-row">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="data-box" style="background-color: #ebf5fb;">
+                        <strong>Difference Display</strong>
+                        <div class="note">Shows differences between pawprints</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div class="storage-box">
+                        <strong>HTML Export</strong>
+                        <div class="note">Creates shareable report</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="diagram-container">
+        <h2>Pawprint JSON Structure</h2>
+        
+        <h3>Core Data Structure</h3>
+        <pre><code>{
+  "metadata": {
+    "timestamp": "2025-06-01T12:34:56",
+    "origin": "/path/to/source",
+    "version": "2.0.0"
+  },
+  "directory_structure": {
+    "type": "directory",
+    "name": "root",
+    "children": [
+      {
+        "type": "directory",
+        "name": "subfolder1",
+        "children": [...]
+      },
+      {
+        "type": "file",
+        "name": "example.txt",
+        "size": 1024
+      }
+    ]
+  },
+  "patterns": {
+    "pattern_1": {
+      "description": "File distribution pattern",
+      "score": 0.83,
+      "details": {...}
+    },
+    "pattern_2": {
+      "description": "Directory depth pattern",
+      "score": 0.71,
+      "details": {...}
+    }
+  }
+}</code></pre>
+
+        <h3>Data Flow Between Components</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Input Data</th>
+                    <th>Output Data</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Generate Screen</td>
+                    <td>User directory selection, settings</td>
+                    <td>Configuration object</td>
+                    <td>Validates input before processing</td>
+                </tr>
+                <tr>
+                    <td>Processing Engine</td>
+                    <td>Directory path, settings</td>
+                    <td>Raw pattern data</td>
+                    <td>Performs filesystem operations</td>
+                </tr>
+                <tr>
+                    <td>Pattern Detection</td>
+                    <td>Raw filesystem data</td>
+                    <td>Pattern objects</td>
+                    <td>CPU-intensive analysis</td>
+                </tr>
+                <tr>
+                    <td>JSON Generator</td>
+                    <td>Pattern objects, metadata</td>
+                    <td>JSON string</td>
+                    <td>Creates standardized format</td>
+                </tr>
+                <tr>
+                    <td>Analyze Screen</td>
+                    <td>Pawprint JSON file</td>
+                    <td>Visual representations</td>
+                    <td>Multiple visualization options</td>
+                </tr>
+                <tr>
+                    <td>Comparison Engine</td>
+                    <td>Multiple JSON files</td>
+                    <td>Difference maps</td>
+                    <td>Groups by common origin</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Screen UI Components</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #8e44ad;
+        }
+        .ui-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .wireframe {
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .component {
+            border: 1px solid #bdc3c7;
+            border-radius: 3px;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #ecf0f1;
+        }
+        .component-header {
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            margin: -10px -10px 10px -10px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        .component-purple .component-header {
+            background-color: #8e44ad;
+        }
+        .component-green .component-header {
+            background-color: #2ecc71;
+        }
+        .component-orange .component-header {
+            background-color: #e67e22;
+        }
+        .button {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 3px;
+            margin: 5px;
+            text-align: center;
+        }
+        .button-purple {
+            background-color: #9b59b6;
+        }
+        .button-green {
+            background-color: #2ecc71;
+        }
+        .button-red {
+            background-color: #e74c3c;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .navigation-bar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .updated {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Analyze Screen UI Components</h1>
+        <p class="updated">Last updated: June 5, 2025</p>
+    </div>
+
+    <div class="ui-container">
+        <h2>Analyze Screen Layout</h2>
+        
+        <div class="wireframe">
+            <!-- Navigation Bar -->
+            <div class="navigation-bar">
+                <div class="button">◀ Back</div>
+                <div style="font-weight: bold; font-size: 18px;">Analyze Pawprint</div>
+                <div class="button button-green">Home</div>
+            </div>
+            
+            <!-- File Selection Area -->
+            <div class="component">
+                <div class="component-header">File Selection</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex-grow: 1; padding: 5px 10px; background-color: white; border: 1px solid #ddd;">
+                        /path/to/selected/pawprint.json
+                    </div>
+                    <div class="button">Browse</div>
+                </div>
+            </div>
+            
+            <!-- Tabs Area -->
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd;">
+                <div style="display: flex;">
+                    <div style="padding: 5px 15px; background-color: white; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px;">
+                        Visualization
+                    </div>
+                    <div style="padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px;">
+                        Raw Data
+                    </div>
+                    <div style="padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                        Console
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visualization Area -->
+            <div class="component component-purple">
+                <div class="component-header">Visualization Components</div>
+                
+                <!-- Chart Controls -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <span>Chart Type:</span>
+                        <select style="margin-left: 10px; padding: 3px;">
+                            <option>Time Series</option>
+                            <option>Distribution</option>
+                            <option>Heatmap</option>
+                            <option>Network Graph</option>
+                            <option>Fractal View</option>
+                        </select>
+                    </div>
+                    <div class="button">Chart Options</div>
+                </div>
+                
+                <!-- Chart Area -->
+                <div style="height: 300px; background-color: white; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center;">
+                    [Chart Visualization Area]
+                </div>
+                
+                <!-- Chart Description -->
+                <div style="margin-top: 10px; border: 1px solid #ddd; padding: 10px; background-color: #f8f9fa;">
+                    <h4 style="margin-top: 0;">Chart Description</h4>
+                    <p>Time Series shows patterns over time. Higher values indicate stronger pattern detection. Look for peaks and trends that may indicate significant events or patterns.</p>
+                </div>
+            </div>
+            
+            <!-- Button Area -->
+            <div style="display: flex; justify-content: space-between; margin-top: 20px; padding: 10px; background-color: #f5f5f5; border-top: 1px solid #ddd;">
+                <div class="button">Back</div>
+                <div class="button button-purple">🔍 Compare Pawprints</div>
+                <div class="button button-green">Export Results</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ui-container">
+        <h2>Compare Pawprints Modal</h2>
+        
+        <div class="wireframe">
+            <!-- Modal Header -->
+            <div style="background-color: #8e44ad; color: white; padding: 10px; font-weight: bold;">
+                Pawprint Comparison - [Origin Name]
+            </div>
+            
+            <!-- Comparison Header -->
+            <div style="text-align: center; padding: 10px; font-weight: bold; font-size: 16px;">
+                Comparing 3 Pawprints from Origin: /Users/flowgirl/Documents/SampleDirectory
+            </div>
+            
+            <!-- Comparison Tabs -->
+            <div style="margin: 10px 0; border-bottom: 1px solid #ddd;">
+                <div style="display: flex;">
+                    <div style="padding: 5px 15px; background-color: white; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px;">
+                        Differences
+                    </div>
+                    <div style="padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px;">
+                        file1.json
+                    </div>
+                    <div style="padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; margin-right: 5px;">
+                        file2.json
+                    </div>
+                    <div style="padding: 5px 15px; background-color: #f5f5f5; border: 1px solid #ddd; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                        file3.json
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diff View -->
+            <div style="height: 350px; border: 1px solid #ddd; padding: 10px; background-color: white; overflow: auto; font-family: monospace;">
+                <div style="font-weight: bold; margin-bottom: 10px;">Different Values:</div>
+                
+                <div style="color: #2c3e50; margin-bottom: 5px;">timestamp:</div>
+                <div style="margin-left: 20px; color: #e74c3c;">file1.json: "2025-06-01T14:30:45"</div>
+                <div style="margin-left: 20px; color: #3498db;">file2.json: "2025-06-02T16:20:10"</div>
+                <div style="margin-left: 20px; color: #2ecc71;">file3.json: "2025-06-03T09:15:22"</div>
+                
+                <div style="color: #2c3e50; margin-top: 15px; margin-bottom: 5px;">patterns.pattern_1.score:</div>
+                <div style="margin-left: 20px; color: #e74c3c;">file1.json: 0.78</div>
+                <div style="margin-left: 20px; color: #3498db;">file2.json: 0.85</div>
+                <div style="margin-left: 20px; color: #2ecc71;">file3.json: 0.72</div>
+            </div>
+            
+            <!-- Export Button -->
+            <div style="margin-top: 15px; text-align: center;">
+                <div class="button button-green" style="padding: 8px 20px; font-size: 14px;">Export Comparison Report</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+    </footer>
+</body>
+</html>

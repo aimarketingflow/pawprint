@@ -1,23 +1,25 @@
 {
   "recent_files": [
-    "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
     "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.json",
+    "/Users/flowgirl/Documents/CrashAnalyzer/BinaryAnalysis_pawprint.json",
+    "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
     "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.txt",
     "/Users/flowgirl/Documents_pawprint.json",
     "/Users/flowgirl/Documents/FinAI_pawprint.json",
     "/Users/flowgirl/Documents/PhoneRootKit_pawprint.json"
   ],
   "recent_directories": [
-    "/Users/flowgirl/Documents/FolderHackingAnalysis",
+    "/Users/flowgirl/Documents/CrashAnalyzer/BinaryAnalysis",
     "/Users/flowgirl/Documents/CrashAnalyzer",
+    "/Users/flowgirl/Documents/FolderHackingAnalysis",
     "/Users/flowgirl/Documents/MidiKeyFeed",
     "/Users/flowgirl/Documents",
     "/Users/flowgirl/Documents/FinAI",
     "/Users/flowgirl/Documents/PhoneRootKit"
   ],
   "last_session": {
-    "last_open_file": "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
-    "last_directory": "/Users/flowgirl/Documents/FolderHackingAnalysis",
+    "last_open_file": "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.json",
+    "last_directory": "/Users/flowgirl/Documents",
     "last_export_directory": null,
     "last_screen": "dashboard"
   },

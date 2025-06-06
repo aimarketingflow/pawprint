@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen Wireframes - Pawprinting V2 Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        .intro {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 20px;
+            margin-bottom: 40px;
+        }
+        .wireframe-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .wireframe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .wireframe-preview {
+            height: 200px;
+            background-color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            border-bottom: 3px solid #9b59b6;
+        }
+        .wireframe-content {
+            padding: 15px;
+        }
+        .wireframe-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .wireframe-desc {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .wireframe-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        .wireframe-link:hover {
+            background-color: #8e44ad;
+        }
+        .implementation-plan {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .implementation-step {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .implementation-step:last-child {
+            border-bottom: none;
+        }
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #9b59b6;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 10px;
+            font-weight: bold;
+            line-height: 24px;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .note {
+            background-color: #f8f4e5;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .note h3 {
+            margin-top: 0;
+            color: #d35400;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../../../assets/aimf_logo.png" alt="AIMF LLC Logo" class="logo" onerror="this.style.display='none'">
+        <h1>Pawprinting V2 - Compare Screen Wireframes</h1>
+    </header>
+    
+    <section class="intro">
+        <h2>Overview</h2>
+        <p>This documentation presents wireframes for a new dedicated "Compare" screen in the Pawprinting V2 application. Moving comparison functionality out of the Analyze screen into its own main navigation tab will improve the user experience by:</p>
+        <ul>
+            <li>Providing a dedicated interface optimized specifically for comparison tasks</li>
+            <li>Simplifying the mental model of the application (Generate → Analyze → Compare)</li>
+            <li>Allowing more robust comparison features without overcrowding the Analyze screen</li>
+            <li>Creating space for specialized comparison visualizations and reporting tools</li>
+        </ul>
+        <p>The following wireframes show different components of the proposed Compare screen.</p>
+    </section>
+    
+    <section class="wireframe-grid">
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Main Layout</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Main Layout</div>
+                <div class="wireframe-desc">Overall structure of the Compare screen with navigation elements and layout zones.</div>
+                <a href="01_main_layout.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">File Selection Sidebar</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">File Selection Sidebar</div>
+                <div class="wireframe-desc">Left sidebar for selecting and organizing pawprint files for comparison.</div>
+                <a href="02_file_selection_sidebar.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Comparison View</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Comparison View</div>
+                <div class="wireframe-desc">Main comparison interface showing differences between selected pawprints.</div>
+                <a href="03_comparison_view.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Charts</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Comparison Charts</div>
+                <div class="wireframe-desc">Visual representation of differences between pawprints using various chart types.</div>
+                <a href="04_comparison_charts.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Raw Data View</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Raw Data View</div>
+                <div class="wireframe-desc">JSON structure view of the pawprint files being compared.</div>
+                <a href="05_raw_data_view.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Summary View</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Summary View</div>
+                <div class="wireframe-desc">Overview of key findings and insights from the comparison.</div>
+                <a href="06_summary_view.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Export Dialog</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Export Dialog</div>
+                <div class="wireframe-desc">Dialog for exporting comparison reports in various formats.</div>
+                <a href="07_export_dialog.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+        
+        <div class="wireframe-card">
+            <div class="wireframe-preview">Filter Options</div>
+            <div class="wireframe-content">
+                <div class="wireframe-title">Filter Options</div>
+                <div class="wireframe-desc">Dialog for filtering and customizing comparison results.</div>
+                <a href="08_filter_options.html" class="wireframe-link">View Wireframe</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="implementation-plan">
+        <h2>Implementation Plan</h2>
+        
+        <div class="note">
+            <h3>Design Decision</h3>
+            <p>This wireframe set proposes moving comparison functionality into its own dedicated screen. This is a significant change from the current implementation where comparison is embedded in the Analyze screen.</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">1</span>
+            <span class="step-title">Create CompareScreen Class</span>
+            <p>Develop a new CompareScreen class similar to other main screens (HomeScreen, GenerateScreen, AnalyzeScreen).</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">2</span>
+            <span class="step-title">Implement File Selection Widget</span>
+            <p>Create a file selection sidebar component that allows users to select multiple pawprint files and organize them by origin or other criteria.</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">3</span>
+            <span class="step-title">Develop Comparison Visualization</span>
+            <p>Port existing comparison functionality from AnalyzeScreen and enhance it with dedicated comparison visualizations and charts.</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">4</span>
+            <span class="step-title">Add Tab Navigation</span>
+            <p>Implement tab-based navigation within the Compare screen for different view types (comparison, charts, raw data, summary).</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">5</span>
+            <span class="step-title">Create Filtering and Export Options</span>
+            <p>Develop dialogs for filtering comparison results and exporting reports in various formats.</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">6</span>
+            <span class="step-title">Update Main Navigation</span>
+            <p>Add Compare as a main navigation option in the application header alongside Generate and Analyze.</p>
+        </div>
+        
+        <div class="implementation-step">
+            <span class="step-number">7</span>
+            <span class="step-title">Remove Redundant Functionality</span>
+            <p>Once the dedicated Compare screen is implemented, remove the comparison button and related functionality from the Analyze screen.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 5, 2025</p>
+    </footer>
+</body>
+</html>
