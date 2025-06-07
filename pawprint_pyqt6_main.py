@@ -13,8 +13,8 @@ import os
 import sys
 import json
 import logging
-from datetime import datetime
 import traceback
+from datetime import datetime
 from pathlib import Path
 
 # Import PyQt6 modules
@@ -480,6 +480,22 @@ def main():
     # Import config paths again here for safety
     from config_paths import RESOURCE_DIR, LOGS_DIR, CONFIG_DIR, RESULTS_DIR
     
+    # Import scrollable screens module to patch all screen classes
+    try:
+        from screens.apply_scrollable_screens import patch_all_screen_classes
+        logger.info("Applied scrollable functionality to all screens")
+    except Exception as e:
+        logger.error(f"Failed to apply scrollable screens: {str(e)}")
+        logger.debug(traceback.format_exc())
+        
+    # Import fixed size window utility
+    try:
+        from utils.fixed_size_app_window import FixedSizeAppWindow
+        logger.info("Fixed size window utility imported")
+    except Exception as e:
+        logger.error(f"Failed to import fixed size window utility: {str(e)}")
+        logger.debug(traceback.format_exc())
+    
     # Set application icon (if available)
     icon_path = os.path.join(RESOURCE_DIR, "icon.png")
     if os.path.exists(icon_path):
@@ -502,8 +518,29 @@ def main():
     # app.processEvents()
 
     try:
-        # Create and show the main window
+        # Create the main window
         window = PawprintMainWindow()
+        
+        # Apply fixed size with internal scrolling
+        try:
+            # Get screen dimensions and apply fixed size with scrolling
+            screen_width, screen_height = FixedSizeAppWindow.get_screen_dimensions()
+            logger.info(f"Screen dimensions detected: {screen_width}x{screen_height}")
+            
+            # Apply a 5% margin as requested
+            scroll_area = FixedSizeAppWindow.apply_fixed_size_with_scrolling(
+                window, 
+                screen_width, 
+                screen_height, 
+                margin_percent=5
+            )
+            
+            logger.info("Applied fixed window size with internal scrolling")
+        except Exception as e:
+            logger.error(f"Failed to apply fixed window size: {str(e)}")
+            logger.debug(traceback.format_exc())
+        
+        # Show the main window
         window.show()
 
         # Close splash if we added one

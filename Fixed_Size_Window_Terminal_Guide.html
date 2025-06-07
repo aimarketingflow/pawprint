@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 V2 - Fixed Size Window Implementation Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e1e1e1;
+            background-color: #121212;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 1rem;
+        }
+        
+        h1 {
+            color: #bb86fc;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            color: #03dac6;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            color: #bb86fc;
+        }
+        
+        .metadata {
+            font-style: italic;
+            color: #aaaaaa;
+            margin-bottom: 1rem;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1e1e;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #03dac6;
+        }
+        
+        pre {
+            background-color: #1e1e1e;
+            border-left: 4px solid #bb86fc;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 3px;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e1e1e1;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+        
+        th {
+            background-color: #2d2d2d;
+            color: #bb86fc;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #222222;
+        }
+        
+        a {
+            color: #bb86fc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #03dac6;
+        }
+        
+        .note {
+            background-color: rgba(187, 134, 252, 0.1);
+            border-left: 4px solid #bb86fc;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            color: #888888;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <!-- Logo placeholder -->
+            <h1>AIMF LLC</h1>
+        </div>
+        <h1>Pawprinting PyQt6 V2 - Fixed Size Window Implementation Guide</h1>
+        <div class="metadata">
+            <strong>Date:</strong> June 7, 2025 | <strong>Version:</strong> 1.0
+        </div>
+    </header>
+
+    <section>
+        <h2>Overview</h2>
+        <p>
+            This guide documents the implementation of a fixed size window with internal scrolling for the 
+            Pawprinting PyQt6 V2 application. The fixed size window ensures that the application maintains 
+            consistent dimensions across different displays while allowing users to access all content 
+            through scrolling.
+        </p>
+    </section>
+
+    <section>
+        <h2>Implementation Architecture</h2>
+        <p>
+            The fixed size window implementation follows a modular design that builds upon the existing 
+            scrollable screens feature, providing application-wide scrolling in both horizontal and vertical directions.
+        </p>
+
+        <h3>Key Components</h3>
+        <ol>
+            <li>
+                <strong>Fixed Size Window Utility (<code>/utils/fixed_size_app_window.py</code>)</strong>
+                <ul>
+                    <li>Provides utility functions for setting fixed window dimensions</li>
+                    <li>Implements application-wide scrolling for the main window</li>
+                    <li>Automatically detects screen dimensions and applies appropriate scaling</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Main Application Integration (<code>pawprint_pyqt6_main.py</code>)</strong>
+                <ul>
+                    <li>Imports the fixed size window utility</li>
+                    <li>Applies fixed size constraints after main window creation</li>
+                    <li>Configures scrolling behavior for the entire application window</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Technical Implementation Details</h2>
+
+        <h3>Window Size Calculation</h3>
+        <p>The application window size is calculated based on the current screen size with a configurable margin:</p>
+        <pre><code># Get screen dimensions
+screen_width, screen_height = FixedSizeAppWindow.get_screen_dimensions()
+
+# Apply margin percentage (e.g., 5%)
+width = int(screen_width * (1 - margin_percent/100))
+height = int(screen_height * (1 - margin_percent/100))</code></pre>
+
+        <h3>Main Window Constraints</h3>
+        <p>Fixed size constraints are applied to the main window to prevent resizing:</p>
+        <pre><code># Set fixed size for the main window
+main_window.setFixedSize(width, height)
+main_window.setMinimumSize(width, height)
+main_window.setMaximumSize(width, height)</code></pre>
+
+        <h3>Scroll Area Implementation</h3>
+        <p>The entire application UI is wrapped in a scroll area that provides both horizontal and vertical scrolling:</p>
+        <pre><code># Create a scroll area wrapper
+scroll_area = QScrollArea()
+scroll_area.setWidgetResizable(True)
+scroll_area.setFrameShape(QFrame.Shape.NoFrame)
+scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)</code></pre>
+    </section>
+
+    <section>
+        <h2>Usage Characteristics</h2>
+
+        <h3>Window Behavior</h3>
+        <ul>
+            <li>The application window has a fixed size equal to the screen dimensions less a 5% margin</li>
+            <li>The window cannot be resized by the user</li>
+            <li>All content inside the window can be scrolled both horizontally and vertically</li>
+        </ul>
+
+        <h3>Scrolling Behavior</h3>
+        <ul>
+            <li>Horizontal scroll bars appear automatically when content exceeds the window width</li>
+            <li>Vertical scroll bars appear automatically when content exceeds the window height</li>
+            <li>Scroll bars are styled according to the application's dark theme</li>
+        </ul>
+
+        <h3>Keyboard and Mouse Navigation</h3>
+        <ul>
+            <li>Standard keyboard navigation (arrow keys, Page Up/Down, Home/End)</li>
+            <li>Mouse wheel scrolling for vertical navigation</li>
+            <li>Shift+Wheel or trackpad gestures for horizontal scrolling</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Integration with Individual Screens</h2>
+        <p>
+            The fixed size window implementation works in conjunction with the existing scrollable screens feature:
+        </p>
+        <ol>
+            <li>The main window provides application-wide scrolling for the entire UI</li>
+            <li>Individual screens have their own scrollable containers for screen-specific content</li>
+            <li>Both scrolling mechanisms operate independently, providing nested scrolling areas</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Example Dimensions</h2>
+        <p>Based on common screen resolutions, the fixed window sizes (with 5% margin) would be:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Screen Resolution</th>
+                    <th>Window Size (5% margin)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1920 × 1080</td>
+                    <td>1824 × 1026</td>
+                </tr>
+                <tr>
+                    <td>1440 × 900</td>
+                    <td>1368 × 855</td>
+                </tr>
+                <tr>
+                    <td>1366 × 768</td>
+                    <td>1297 × 729</td>
+                </tr>
+                <tr>
+                    <td>2560 × 1440</td>
+                    <td>2432 × 1368</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Error Handling</h2>
+        <p>The implementation includes comprehensive error handling:</p>
+        <ul>
+            <li>Graceful fallback to standard window behavior if fixed size cannot be applied</li>
+            <li>Detection of available screen dimensions with fallback to default values if needed</li>
+            <li>Detailed logging of any issues encountered during the fixed size application</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Extending the Implementation</h2>
+        <p>To modify the fixed size window behavior:</p>
+        <ol>
+            <li>Adjust the margin percentage in <code>pawprint_pyqt6_main.py</code> (currently set to 5%)</li>
+            <li>Modify the scroll bar policies in <code>fixed_size_app_window.py</code> to change when scroll bars appear</li>
+            <li>Add custom styling for the scroll bars in the application's theme manager</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Troubleshooting</h2>
+        <p>If issues occur with the fixed size window:</p>
+        <ol>
+            <li>Check application logs for any errors related to the fixed size implementation</li>
+            <li>Verify that the screen dimensions are being correctly detected</li>
+            <li>Ensure that the main window's central widget is properly set up for scrolling</li>
+        </ol>
+        <div class="note">
+            <p><strong>Note:</strong> If the application appears to have duplicate scrollbars, this is expected behavior as both the main window and individual screens have independent scrolling capabilities.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Developer Notes</h2>
+        <ul>
+            <li>The fixed window size is calculated once at application startup based on current screen dimensions</li>
+            <li>Scroll bars only appear when content exceeds the visible area</li>
+            <li>All UI components maintain their original functionality within the scrollable container</li>
+        </ul>
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2025 AIMF LLC - All Rights Reserved</p>
+    </div>
+</body>
+</html>
