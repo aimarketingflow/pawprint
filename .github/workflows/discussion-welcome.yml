@@ -1,0 +1,50 @@
+name: Discussion Welcome
+
+on:
+  discussion:
+    types: [created]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome user
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const discussionId = context.payload.discussion.node_id;
+            
+            // Get the author's username
+            const author = context.payload.discussion.user.login;
+            
+            // Create a personalized welcome message
+            const welcomeMessage = `
+            Welcome to the Pawprinting PyQt6 V2 community, @${author}! 👋
+            
+            Thank you for starting a new discussion. Your input is valuable to our project.
+            
+            Here are a few resources to get you started:
+            - [Documentation](https://aimarketingflow.github.io/pawprint/)
+            - [Development Guide](https://aimarketingflow.github.io/pawprint/Development_Guide/)
+            - [Contributing Guide](https://aimarketingflow.github.io/pawprint/CONTRIBUTING/)
+            
+            The team will respond to your discussion as soon as possible. In the meantime, feel free to explore other discussions and contribute!
+            
+            *~ Pawprinting Team 🐾*
+            `;
+            
+            // Add the comment to the discussion
+            await github.graphql(`
+              mutation {
+                addDiscussionComment(input: {
+                  discussionId: "${discussionId}",
+                  body: ${JSON.stringify(welcomeMessage)}
+                }) {
+                  comment {
+                    id
+                  }
+                }
+              }
+            `);
