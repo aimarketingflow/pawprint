@@ -1,9 +1,10 @@
 ---
 name: Feature request
 about: Suggest an idea for the Pawprinting PyQt6 V2 application
-title: '[FEATURE] '
+title: "[FEATURE] "
 labels: enhancement
 assignees: ''
+
 ---
 
 ## Problem Statement
