@@ -1,6 +1,6 @@
 # Pawprinting PyQt6 V2 Application
 
-A powerful digital pawprinting tool built with PyQt6 for improved native macOS integration.
+A powerful digital pawprinting tool built with PyQt6 for improved native macOS integration with advanced automation capabilities.
 
 ## Overview
 
@@ -18,6 +18,10 @@ This application is the V2 release of the Pawprinting PyQt6 application with enh
 - **File Comparison**: Advanced pawprint comparison with detailed similarity metrics
 - **HTML Report Export**: Rich, color-coded comparison reports with detailed analysis
 - **Desktop Launcher**: Easy-to-use desktop shortcut for quick application startup
+- **Modular Automation System**: Flexible task scheduling and execution framework
+- **Pawprint History Management**: Track and manage previously analyzed folders
+- **Batch Pawprint Processing**: Refresh pawprints for multiple folders in one operation
+- **CLI Automation Interface**: Command-line tools for scripting and automation
 
 ## Installation
 
@@ -78,11 +82,12 @@ alias pawprint_pyqt6='cd /path/to/Pawprinting_PyQt6 && source venv_pawprinting_p
 ## Project Structure
 
 - `/screens`: UI screens for the application
-- `/utils`: Utility modules for file operations, state management, etc.
+- `/utils`: Utility modules for file operations, state management, automation, etc.
 - `/components`: Reusable UI components
 - `/resources`: Application resources (icons, etc.)
 - `/config`: Configuration files
 - `/logs`: Log output
+- `/docs`: Documentation and guides
 - `/_Chatlogs`: Development chat logs
 
 ## Key Components
@@ -93,6 +98,12 @@ alias pawprint_pyqt6='cd /path/to/Pawprinting_PyQt6 && source venv_pawprinting_p
 - **Progress Tracker**: Tracks operation progress with ETA calculation
 - **Notification Manager**: Centralizes user notifications
 - **Console Widget**: Rich text console with ANSI color support
+- **Automation System**: Modular system for task scheduling and execution
+- **Task Manager**: Manages execution of automation tasks with threading support
+- **Pawprint History Manager**: Tracks and manages previously analyzed folders
+- **Task Scheduler**: Schedules tasks based on time or events
+- **Task Trigger Manager**: Manages event-based triggers for automation tasks
+- **CLI Interface**: Command-line tools for automation tasks
 
 ## Development
 

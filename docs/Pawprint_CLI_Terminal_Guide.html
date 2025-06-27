@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 V2 - Command Line Interface Guide</title>
+    <style>
+        /* Dark Mode Theme with Neon Purple Accent */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #121212;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b30ff; /* Neon Purple */
+            color: #9b30ff; /* Neon Purple */
+        }
+        
+        h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            color: #b967ff; /* Lighter Purple */
+        }
+        
+        a {
+            color: #9b30ff; /* Neon Purple */
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: #d186ff; /* Lighter Purple */
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #d186ff; /* Lighter Purple */
+        }
+        
+        pre {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #9b30ff; /* Neon Purple */
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #2d2d2d;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        
+        .warning {
+            background-color: rgba(255, 165, 0, 0.1);
+            border-left: 4px solid #ffa500; /* Orange */
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        
+        .note {
+            background-color: rgba(155, 48, 255, 0.1);
+            border-left: 4px solid #9b30ff; /* Neon Purple */
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        
+        .command-group {
+            margin: 25px 0;
+        }
+        
+        .command-title {
+            font-weight: bold;
+            color: #b967ff; /* Lighter Purple */
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #777;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pawprinting PyQt6 V2 - Command Line Interface Guide</h1>
+    
+    <p>This comprehensive guide covers all command line functionality available in the Pawprinting PyQt6 V2 project. Use these commands to automate pawprinting tasks, manage pawprint history, and perform batch operations without the GUI.</p>
+    
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ul>
+        <li><a href="#installation-and-setup">Installation and Setup</a></li>
+        <li><a href="#basic-usage">Basic Usage</a></li>
+        <li><a href="#automation-commands">Automation Commands</a></li>
+        <li><a href="#diagnostic-commands">Diagnostic Commands</a></li>
+        <li><a href="#configuration-options">Configuration Options</a></li>
+        <li><a href="#recommended-aliases">Recommended Aliases</a></li>
+        <li><a href="#logging-and-output">Logging and Output</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ul>
+    
+    <h2 id="installation-and-setup">Installation and Setup</h2>
+    
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Python 3.9+</li>
+        <li>All dependencies installed (<code>pip3 install -r requirements.txt</code>)</li>
+        <li>Virtual environment activated (<code>source venv_pawprinting_pyqt6/bin/activate</code>)</li>
+    </ul>
+    
+    <h3>Setting Up Your Environment</h3>
+    <pre><code># Clone the repository
+git clone git@github.com:aimarketingflow/pawprint.git
+cd Pawprinting_PyQt6_V2
+
+# Create and activate virtual environment
+python3 -m venv venv_pawprinting_pyqt6
+source venv_pawprinting_pyqt6/bin/activate
+
+# Install dependencies
+pip3 install -r requirements.txt</code></pre>
+    
+    <h2 id="basic-usage">Basic Usage</h2>
+    
+    <h3>Starting the GUI Application</h3>
+    <pre><code># From the project root with virtual environment activated
+python3 pawprint_pyqt6_main.py</code></pre>
+    
+    <h3>Running Pawprint Generation from CLI</h3>
+    <pre><code># Generate a pawprint for a folder
+python3 pawprint_pyqt6_main.py --cli --generate --folder "/path/to/folder" --output "/path/to/output.pawprint"
+
+# Generate a pawprint with options
+python3 pawprint_pyqt6_main.py --cli --generate --folder "/path/to/folder" --depth 5 --include-hidden</code></pre>
+    
+    <h2 id="automation-commands">Automation Commands</h2>
+    
+    <p>The <code>cli_automation.py</code> script provides comprehensive automation capabilities:</p>
+    
+    <div class="command-group">
+        <h3>Pawprint History Management</h3>
+        <pre><code># List all pawprints in history
+./cli_automation.py --list-history
+
+# View details for a specific pawprint entry
+./cli_automation.py --list-history --detail --id "PAWPRINT_ID"</code></pre>
+    </div>
+    
+    <div class="command-group">
+        <h3>Batch Refresh Operations</h3>
+        <pre><code># Refresh all pawprints in history
+./cli_automation.py --refresh-all
+
+# Refresh only pawprints from the last 7 days
+./cli_automation.py --refresh-recent
+
+# Refresh pawprints from the last 30 days
+./cli_automation.py --refresh-recent --days 30
+
+# Refresh a specific folder
+./cli_automation.py --refresh-folder "/path/to/folder"</code></pre>
+    </div>
+    
+    <div class="note">
+        <p><strong>Progress and Monitoring</strong></p>
+        <p>All commands show real-time progress with:</p>
+        <ul>
+            <li>Current operation status</li>
+            <li>Percent complete indicator</li>
+            <li>ETA for completion</li>
+            <li>Log file path for detailed monitoring</li>
+        </ul>
+    </div>
+    
+    <h2 id="diagnostic-commands">Diagnostic Commands</h2>
+    <pre><code># Run system diagnostics
+./cli_automation.py --diagnostic
+
+# Test with a specific folder
+./cli_automation.py --diagnostic --test-folder "/path/to/test/folder"
+
+# Verbose diagnostics for detailed output
+./cli_automation.py --diagnostic --verbose</code></pre>
+    
+    <h2 id="configuration-options">Configuration Options</h2>
+    
+    <p>The CLI supports various configuration options:</p>
+    
+    <pre><code># Specify custom data directory
+./cli_automation.py --data-dir "/path/to/data" --list-history
+
+# Specify custom log directory
+./cli_automation.py --log-dir "/path/to/logs" --refresh-all
+
+# Enable verbose logging
+./cli_automation.py --verbose --refresh-recent</code></pre>
+    
+    <h2 id="recommended-aliases">Recommended Aliases</h2>
+    
+    <p>Add these to your <code>.zshrc</code> or <code>.bash_profile</code> for convenience:</p>
+    
+    <pre><code># General usage
+alias pawprint='cd /path/to/Pawprinting_PyQt6_V2 && source venv_pawprinting_pyqt6/bin/activate && python3 pawprint_pyqt6_main.py'
+
+# CLI automation
+alias pawprint-cli='cd /path/to/Pawprinting_PyQt6_V2 && source venv_pawprinting_pyqt6/bin/activate && ./cli_automation.py'
+
+# Common operations
+alias pawprint-history='pawprint-cli --list-history'
+alias pawprint-refresh-all='pawprint-cli --refresh-all'
+alias pawprint-refresh-recent='pawprint-cli --refresh-recent'</code></pre>
+    
+    <h2 id="logging-and-output">Logging and Output</h2>
+    
+    <p>All CLI commands generate:</p>
+    
+    <ol>
+        <li><strong>Terminal output</strong> - Real-time progress and status</li>
+        <li><strong>Log files</strong> - Detailed logs stored in <code>/logs</code> directory</li>
+        <li><strong>Summary files</strong> - Markdown summaries of operations in <code>/logs</code> directory</li>
+    </ol>
+    
+    <h3>Log File Structure</h3>
+    <pre><code>logs/
+├── cli_automation_20250627_122536.log   # Detailed timestamped log
+├── cli_summary_20250627_122536.md       # Operation summary in markdown
+└── ...</code></pre>
+    
+    <h2 id="troubleshooting">Troubleshooting</h2>
+    
+    <h3>Common Issues</h3>
+    
+    <div class="command-group">
+        <p class="command-title">Command Not Found</p>
+        <pre><code>-bash: ./cli_automation.py: Permission denied</code></pre>
+        <p><strong>Solution</strong>: Ensure the file has execution permissions:</p>
+        <pre><code>chmod +x ./cli_automation.py</code></pre>
+    </div>
+    
+    <div class="command-group">
+        <p class="command-title">Import Errors</p>
+        <pre><code>ImportError: No module named 'PyQt6'</code></pre>
+        <p><strong>Solution</strong>: Activate the virtual environment:</p>
+        <pre><code>source venv_pawprinting_pyqt6/bin/activate</code></pre>
+    </div>
+    
+    <div class="command-group">
+        <p class="command-title">Data Access Errors</p>
+        <pre><code>Error: Cannot access data directory</code></pre>
+        <p><strong>Solution</strong>: Check permissions or specify an accessible directory:</p>
+        <pre><code>./cli_automation.py --data-dir "/Users/username/Documents/pawprint_data" --refresh-all</code></pre>
+    </div>
+    
+    <h3>Getting Help</h3>
+    
+    <p>For detailed help on all available commands and options:</p>
+    
+    <pre><code>./cli_automation.py --help</code></pre>
+    
+    <p>For diagnostic information:</p>
+    
+    <pre><code>./cli_automation.py --diagnostic --verbose</code></pre>
+    
+    <h2>Examples</h2>
+    
+    <h3>Complete Refresh Workflow</h3>
+    
+    <pre><code># List current history
+./cli_automation.py --list-history
+
+# Refresh all pawprints
+./cli_automation.py --refresh-all --verbose
+
+# Verify results
+./cli_automation.py --list-history</code></pre>
+    
+    <h3>Targeted Refresh Example</h3>
+    
+    <pre><code># Refresh only recently modified folders (last 14 days)
+./cli_automation.py --refresh-recent --days 14 --verbose</code></pre>
+    
+    <h3>Diagnostic Check</h3>
+    
+    <pre><code># Run full diagnostics with a test folder
+./cli_automation.py --diagnostic --test-folder "/Users/username/Documents/test_data"</code></pre>
+    
+    <footer>
+        <p>AIMF LLC © 2025 | Pawprinting PyQt6 V2</p>
+        <p>Last updated: June 27, 2025</p>
+    </footer>
+</body>
+</html>
