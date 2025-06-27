@@ -315,16 +315,15 @@ class PawprintMainWindow(QMainWindow):
     
     def show_settings_screen(self):
         """Switch to settings screen"""
-        # Uncomment when settings screen is implemented
-        # self.central_widget.setCurrentWidget(self.settings_screen)
-        # logger.info("Showing settings screen")
+        # Ensure settings screen is created
+        if not hasattr(self, "settings_screen") or self.settings_screen is None:
+            from screens.settings_screen import SettingsScreen
+            self.settings_screen = SettingsScreen(self)
+            self.central_widget.addWidget(self.settings_screen)
         
-        # For now, show a message
-        NotificationManager.show_dialog(
-            "Not Implemented", 
-            "Settings screen is not yet implemented.",
-            "info"
-        )
+        # Switch to settings screen
+        self.central_widget.setCurrentWidget(self.settings_screen)
+        logger.info("Showing settings screen")
         
     def show_about(self):
         """Show about dialog"""

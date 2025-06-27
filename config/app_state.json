@@ -1,5 +1,6 @@
 {
   "recent_files": [
+    "/Users/flowgirl/Documents/CrashAnalyzer1_pawprint.json",
     "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.json",
     "/Users/flowgirl/Documents/CrashAnalyzer/BinaryAnalysis_pawprint.json",
     "/Users/flowgirl/Documents/FolderHackingAnalysis_pawprint.json",
@@ -9,6 +10,7 @@
     "/Users/flowgirl/Documents/PhoneRootKit_pawprint.json"
   ],
   "recent_directories": [
+    "/Users/flowgirl/Documents/CrashAnalyzer1",
     "/Users/flowgirl/Documents/CrashAnalyzer/BinaryAnalysis",
     "/Users/flowgirl/Documents/CrashAnalyzer",
     "/Users/flowgirl/Documents/FolderHackingAnalysis",
@@ -18,8 +20,8 @@
     "/Users/flowgirl/Documents/PhoneRootKit"
   ],
   "last_session": {
-    "last_open_file": "/Users/flowgirl/Documents/CrashAnalyzer_pawprint.json",
-    "last_directory": "/Users/flowgirl/Documents",
+    "last_open_file": "/Users/flowgirl/Documents/CrashAnalyzer1_pawprint.json",
+    "last_directory": "/Users/flowgirl/Documents/CrashAnalyzer1",
     "last_export_directory": null,
     "last_screen": "dashboard"
   },

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - File Explorer Component</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .file-explorer {
+            margin: 20px 0;
+            border: 1px solid #4a6380;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .explorer-header {
+            background-color: #2c3e50;
+            padding: 10px;
+            border-bottom: 1px solid #4a6380;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .explorer-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .action-button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        .action-button.secondary {
+            background-color: #7f8c8d;
+        }
+        .explorer-tabs {
+            display: flex;
+            background-color: #34495e;
+            border-bottom: 1px solid #4a6380;
+        }
+        .explorer-tab {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9em;
+            position: relative;
+        }
+        .explorer-tab.active {
+            background-color: #3498db;
+        }
+        .explorer-tab-count {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+        .search-bar {
+            padding: 8px;
+            background-color: #2c3e50;
+            border-bottom: 1px solid #4a6380;
+            display: flex;
+        }
+        .search-input {
+            flex-grow: 1;
+            background-color: #34495e;
+            border: 1px solid #4a6380;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .file-list {
+            height: 250px;
+            overflow-y: auto;
+            background-color: #2c3e50;
+        }
+        .file-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid #34495e;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .file-item:hover {
+            background-color: #34495e;
+        }
+        .file-item.selected {
+            background-color: rgba(52, 152, 219, 0.3);
+            border-left: 3px solid #3498db;
+        }
+        .file-item-icon {
+            width: 16px;
+            margin-right: 8px;
+            color: #3498db;
+            text-align: center;
+        }
+        .file-item.added .file-item-icon {
+            color: #2ecc71;
+        }
+        .file-item.deleted .file-item-icon {
+            color: #e74c3c;
+        }
+        .file-item.modified .file-item-icon {
+            color: #f39c12;
+        }
+        .file-item-name {
+            flex-grow: 1;
+            font-size: 0.9em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .file-item-badge {
+            font-size: 0.8em;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        .badge-added {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .badge-deleted {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .badge-modified {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        .badge-unchanged {
+            background-color: rgba(149, 165, 166, 0.2);
+            color: #95a5a6;
+        }
+        .explorer-footer {
+            padding: 8px;
+            background-color: #2c3e50;
+            border-top: 1px solid #4a6380;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #bdc3c7;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - File Explorer Component</h1>
+    <p class="description">This wireframe shows the file explorer component that allows users to quickly navigate between different file changes in the pawprint comparison.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+        <a href="03_comparison_view_file_detail.html" class="link-button">View File Detail</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <div class="file-explorer">
+                <div class="explorer-header">
+                    <div>File Changes</div>
+                    <div class="explorer-actions">
+                        <button class="action-button">Group By Path</button>
+                        <button class="action-button secondary">Expand All</button>
+                    </div>
+                </div>
+                
+                <div class="explorer-tabs">
+                    <div class="explorer-tab active">All Changes <span class="explorer-tab-count">27</span></div>
+                    <div class="explorer-tab">Added <span class="explorer-tab-count">12</span></div>
+                    <div class="explorer-tab">Deleted <span class="explorer-tab-count">8</span></div>
+                    <div class="explorer-tab">Modified <span class="explorer-tab-count">7</span></div>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search files...">
+                </div>
+                
+                <div class="file-list">
+                    <div class="file-item added">
+                        <div class="file-item-icon">+</div>
+                        <div class="file-item-name">/System/Library/Extensions/AppleHDA.kext</div>
+                        <div class="file-item-badge badge-added">Added</div>
+                    </div>
+                    <div class="file-item modified selected">
+                        <div class="file-item-icon">≠</div>
+                        <div class="file-item-name">/System/Library/Kernels/kernel.development</div>
+                        <div class="file-item-badge badge-modified">Modified</div>
+                    </div>
+                    <div class="file-item deleted">
+                        <div class="file-item-icon">-</div>
+                        <div class="file-item-name">/System/Library/Caches/com.apple.kext.caches</div>
+                        <div class="file-item-badge badge-deleted">Deleted</div>
+                    </div>
+                    <div class="file-item added">
+                        <div class="file-item-icon">+</div>
+                        <div class="file-item-name">/System/Library/Extensions/IOUSBFamily.kext</div>
+                        <div class="file-item-badge badge-added">Added</div>
+                    </div>
+                    <div class="file-item modified">
+                        <div class="file-item-icon">≠</div>
+                        <div class="file-item-name">/System/Library/LaunchDaemons/com.apple.WindowServer.plist</div>
+                        <div class="file-item-badge badge-modified">Modified</div>
+                    </div>
+                    <div class="file-item added">
+                        <div class="file-item-icon">+</div>
+                        <div class="file-item-name">/System/Library/Frameworks/CoreAudio.framework</div>
+                        <div class="file-item-badge badge-added">Added</div>
+                    </div>
+                    <div class="file-item deleted">
+                        <div class="file-item-icon">-</div>
+                        <div class="file-item-name">/System/Library/PreferencePanes/Network.prefPane</div>
+                        <div class="file-item-badge badge-deleted">Deleted</div>
+                    </div>
+                    <div class="file-item modified">
+                        <div class="file-item-icon">≠</div>
+                        <div class="file-item-name">/System/Library/CoreServices/WindowServer</div>
+                        <div class="file-item-badge badge-modified">Modified</div>
+                    </div>
+                </div>
+                
+                <div class="explorer-footer">
+                    <div>27 files changed</div>
+                    <div>Click on a file to see detailed changes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the File Explorer:</strong></p>
+        <ul>
+            <li><strong>Tabs:</strong> Quickly filter by change type (added, deleted, modified)</li>
+            <li><strong>Search:</strong> Find specific files by name or path</li>
+            <li><strong>Visual indicators:</strong> Color-coded badges and icons for each change type</li>
+            <li><strong>Selection:</strong> Click any file to view its detailed changes (highlighted in blue)</li>
+            <li><strong>Group By:</strong> Organize files by directory path for better navigation</li>
+            <li><strong>Expand/Collapse:</strong> Control the view of nested directories</li>
+        </ul>
+        <p>When a user clicks on a file in this explorer, the File Detail View (03_comparison_view_file_detail.html) will be displayed.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

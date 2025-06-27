@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - JSON Tree Diff</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .diff-view {
+            font-family: monospace;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .diff-options {
+            display: flex;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .diff-type-selector {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-type-option {
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #2c3e50;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-type-option.active {
+            background-color: #3498db;
+        }
+        .diff-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-action {
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .json-tree {
+            font-family: monospace;
+            margin-top: 15px;
+        }
+        .tree-item {
+            margin: 2px 0;
+            position: relative;
+        }
+        .tree-item-content {
+            display: flex;
+            align-items: center;
+        }
+        .tree-expander {
+            margin-right: 5px;
+            cursor: pointer;
+            width: 12px;
+            text-align: center;
+            display: inline-block;
+        }
+        .tree-key {
+            margin-right: 5px;
+            font-weight: bold;
+        }
+        .tree-value {
+            color: #bdc3c7;
+        }
+        .tree-item-added {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .tree-item-removed {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            text-decoration: line-through;
+        }
+        .tree-item-changed {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        .tree-item-children {
+            margin-left: 20px;
+            border-left: 1px dotted #4a6380;
+            padding-left: 10px;
+        }
+        .diff-summary {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+        .diff-summary-item {
+            margin-left: 15px;
+        }
+        .diff-summary-added {
+            color: #2ecc71;
+        }
+        .diff-summary-removed {
+            color: #e74c3c;
+        }
+        .diff-summary-changed {
+            color: #f39c12;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - JSON Tree Diff</h1>
+    <p class="description">This wireframe shows the JSON tree-based diff visualization for hierarchical comparison of pawprint files.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+        <a href="03_comparison_view_diff_simple.html" class="link-button">View Simple Diff</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <div class="diff-view">
+                <!-- Diff Options -->
+                <div class="diff-options">
+                    <div class="diff-type-selector">
+                        <div class="diff-type-option">Line Diff</div>
+                        <div class="diff-type-option active">JSON Tree</div>
+                        <div class="diff-type-option">Side by Side</div>
+                    </div>
+                    <div class="diff-actions">
+                        <div class="diff-action">Expand All</div>
+                        <div class="diff-action">Collapse All</div>
+                        <div class="diff-action">Copy</div>
+                    </div>
+                </div>
+                
+                <div class="diff-summary">
+                    <div class="diff-summary-item diff-summary-added">12 Added</div>
+                    <div class="diff-summary-item diff-summary-removed">8 Removed</div>
+                    <div class="diff-summary-item diff-summary-changed">7 Changed</div>
+                </div>
+                
+                <!-- JSON Tree View -->
+                <div class="json-tree">
+                    <div class="tree-item">
+                        <div class="tree-item-content">
+                            <span class="tree-expander">▼</span>
+                            <span class="tree-key">metadata:</span>
+                            <span class="tree-value">{object}</span>
+                        </div>
+                        <div class="tree-item-children">
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-key">version:</span>
+                                    <span class="tree-value">"2.1.0"</span>
+                                </div>
+                            </div>
+                            <div class="tree-item tree-item-changed">
+                                <div class="tree-item-content">
+                                    <span class="tree-key">timestamp:</span>
+                                    <span class="tree-value">"2025-06-02T16:20:10" (was "2025-06-01T14:30:45")</span>
+                                </div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-key">creator:</span>
+                                    <span class="tree-value">"Pawprinting Tool v2.1"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tree-item">
+                        <div class="tree-item-content">
+                            <span class="tree-expander">▼</span>
+                            <span class="tree-key">patterns:</span>
+                            <span class="tree-value">{object}</span>
+                        </div>
+                        <div class="tree-item-children">
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">▼</span>
+                                    <span class="tree-key">pattern_1:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                                <div class="tree-item-children">
+                                    <div class="tree-item">
+                                        <div class="tree-item-content">
+                                            <span class="tree-key">name:</span>
+                                            <span class="tree-value">"Directory Structure Pattern"</span>
+                                        </div>
+                                    </div>
+                                    <div class="tree-item tree-item-changed">
+                                        <div class="tree-item-content">
+                                            <span class="tree-key">score:</span>
+                                            <span class="tree-value">0.85 (was 0.78)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">▼</span>
+                                    <span class="tree-key">pattern_2:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                                <div class="tree-item-children">
+                                    <div class="tree-item">
+                                        <div class="tree-item-content">
+                                            <span class="tree-expander">▼</span>
+                                            <span class="tree-key">details:</span>
+                                            <span class="tree-value">{object}</span>
+                                        </div>
+                                        <div class="tree-item-children">
+                                            <div class="tree-item">
+                                                <div class="tree-item-content">
+                                                    <span class="tree-key">distribution:</span>
+                                                    <span class="tree-value">"normal"</span>
+                                                </div>
+                                            </div>
+                                            <div class="tree-item tree-item-changed">
+                                                <div class="tree-item-content">
+                                                    <span class="tree-key">variance:</span>
+                                                    <span class="tree-value">0.17 (was 0.12)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tree-item">
+                        <div class="tree-item-content">
+                            <span class="tree-expander">▼</span>
+                            <span class="tree-key">directory_structure:</span>
+                            <span class="tree-value">{object}</span>
+                        </div>
+                        <div class="tree-item-children">
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">►</span>
+                                    <span class="tree-key">children[0]:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">►</span>
+                                    <span class="tree-key">children[1]:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">►</span>
+                                    <span class="tree-key">children[2]:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                            </div>
+                            <div class="tree-item">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">▼</span>
+                                    <span class="tree-key">children[3]:</span>
+                                    <span class="tree-value">{object}</span>
+                                </div>
+                                <div class="tree-item-children">
+                                    <div class="tree-item tree-item-changed">
+                                        <div class="tree-item-content">
+                                            <span class="tree-key">size:</span>
+                                            <span class="tree-value">2048 (was 1024)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tree-item tree-item-added">
+                                <div class="tree-item-content">
+                                    <span class="tree-expander">►</span>
+                                    <span class="tree-key">children[4]:</span>
+                                    <span class="tree-value">{object} (new)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the JSON Tree Diff:</strong></p>
+        <ul>
+            <li><strong>Hierarchical View:</strong> JSON is displayed as an expandable/collapsible tree structure</li>
+            <li><strong>Change Highlighting:</strong> Color coding shows added, removed, and changed elements</li>
+            <li><strong>Change Values:</strong> Changed values show both the old and new values</li>
+            <li><strong>Interactive Navigation:</strong> Expand/collapse sections to focus on areas of interest</li>
+            <li><strong>Summary Stats:</strong> Counts of additions, deletions, and modifications</li>
+        </ul>
+        <p>The JSON Tree Diff provides a more structured view of changes compared to the line-by-line diff, making it easier to navigate complex JSON structures.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

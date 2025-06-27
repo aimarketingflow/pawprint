@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - Charts View</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 900px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .chart-view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #34495e;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .chart-view-title {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .chart-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .chart-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+        .chart-type-select {
+            padding: 5px;
+            background-color: #2c3e50;
+            color: white;
+            border: 1px solid #4a6380;
+            border-radius: 3px;
+        }
+        .chart-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .chart-action {
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border: 1px solid #4a6380;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-container {
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+            height: 300px;
+            position: relative;
+        }
+        .chart-container-full {
+            grid-column: span 2;
+            height: 400px;
+        }
+        .chart-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #2c3e50;
+            border: 1px dashed #4a6380;
+            border-radius: 3px;
+            position: relative;
+        }
+        .chart-title {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .chart-legend {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            display: flex;
+            gap: 15px;
+            font-size: 0.8em;
+            z-index: 1;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .legend-before {
+            background-color: #3498db;
+        }
+        .legend-after {
+            background-color: #9b59b6;
+        }
+        .legend-diff {
+            background-color: #f39c12;
+        }
+        .chart-diff-indicator {
+            position: absolute;
+            padding: 4px 8px;
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            border-radius: 10px;
+            font-size: 0.8em;
+            z-index: 2;
+        }
+        .indicator-1 {
+            top: 40%;
+            left: 30%;
+        }
+        .indicator-2 {
+            bottom: 30%;
+            right: 40%;
+        }
+        .chart-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        .chart-tab {
+            padding: 8px 15px;
+            background-color: #2c3e50;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .chart-tab.active {
+            background-color: #9b59b6;
+        }
+        .chart-description {
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        .chart-insight {
+            background-color: rgba(52, 152, 219, 0.2);
+            border-left: 3px solid #3498db;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 0 5px 5px 0;
+        }
+        .pattern-score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .pattern-score-card {
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pattern-score-name {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .pattern-score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 8px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .circle-before {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3498db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.5em;
+            color: white;
+            top: -10px;
+            left: -10px;
+        }
+        .circle-after {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #9b59b6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.5em;
+            color: white;
+            bottom: -10px;
+            right: -10px;
+        }
+        .score-high {
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+        .score-medium {
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+        .score-low {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        .pattern-score-change {
+            font-size: 0.9em;
+            color: #bdc3c7;
+        }
+        .change-up {
+            color: #2ecc71;
+        }
+        .change-down {
+            color: #e74c3c;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - Charts View</h1>
+    <p class="description">This wireframe shows the charts tab of the Compare screen, which provides visual representations of changes between pawprint files.</p>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+        <a href="03_comparison_view_main.html" class="link-button">View Main Comparison View</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <!-- Chart View Header -->
+            <div class="chart-view-header">
+                <div class="chart-view-title">Pawprint Pattern Visualizations</div>
+                <div class="chart-controls">
+                    <div class="chart-control">
+                        <label for="chart-type">Chart Type:</label>
+                        <select id="chart-type" class="chart-type-select">
+                            <option>Radar Chart</option>
+                            <option>Bar Chart</option>
+                            <option>Line Chart</option>
+                            <option>Heat Map</option>
+                            <option>Scatter Plot</option>
+                        </select>
+                    </div>
+                    <div class="chart-actions">
+                        <div class="chart-action">Export PNG</div>
+                        <div class="chart-action">Show Data Table</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pattern Score Overview Cards -->
+            <div class="pattern-score-grid">
+                <div class="pattern-score-card">
+                    <div class="pattern-score-name">Directory Structure</div>
+                    <div class="pattern-score-circle score-high">
+                        <div class="circle-before">0.78</div>
+                        <div class="circle-after">0.85</div>
+                        0.85
+                    </div>
+                    <div class="pattern-score-change change-up">+0.07</div>
+                </div>
+                
+                <div class="pattern-score-card">
+                    <div class="pattern-score-name">File Permissions</div>
+                    <div class="pattern-score-circle score-medium">
+                        <div class="circle-before">0.65</div>
+                        <div class="circle-after">0.63</div>
+                        0.63
+                    </div>
+                    <div class="pattern-score-change change-down">-0.02</div>
+                </div>
+                
+                <div class="pattern-score-card">
+                    <div class="pattern-score-name">Startup Processes</div>
+                    <div class="pattern-score-circle score-high">
+                        <div class="circle-before">0.92</div>
+                        <div class="circle-after">0.92</div>
+                        0.92
+                    </div>
+                    <div class="pattern-score-change">No change</div>
+                </div>
+                
+                <div class="pattern-score-card">
+                    <div class="pattern-score-name">Network Services</div>
+                    <div class="pattern-score-circle score-low">
+                        <div class="circle-before">0.45</div>
+                        <div class="circle-after">0.32</div>
+                        0.32
+                    </div>
+                    <div class="pattern-score-change change-down">-0.13</div>
+                </div>
+            </div>
+            
+            <!-- Chart Tabs -->
+            <div class="chart-tabs">
+                <div class="chart-tab active">All Patterns</div>
+                <div class="chart-tab">Directory Structure</div>
+                <div class="chart-tab">File Changes</div>
+                <div class="chart-tab">Time Series</div>
+            </div>
+            
+            <!-- Chart Description -->
+            <div class="chart-description">
+                <p>This radar chart shows the score comparison for all patterns between the before and after pawprints. The distance from the center represents the pattern score (0-1), with higher scores being better.</p>
+                <div class="chart-insight">
+                    <strong>Key Insight:</strong> The most significant change is in the Network Services pattern, which decreased by 0.13 points. This indicates potential modifications to network configuration or services that should be investigated further.
+                </div>
+            </div>
+            
+            <!-- Main Chart -->
+            <div class="chart-container chart-container-full">
+                <div class="chart-title">Pattern Scores Comparison (Radar)</div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color legend-before"></div>
+                        <span>Before (Jun 1)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-after"></div>
+                        <span>After (Jun 2)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-diff"></div>
+                        <span>Significant Change</span>
+                    </div>
+                </div>
+                <div class="chart-placeholder">
+                    <div class="chart-diff-indicator indicator-1">-0.13</div>
+                    <div class="chart-diff-indicator indicator-2">+0.07</div>
+                    [Radar Chart Comparing All Pattern Scores]
+                </div>
+            </div>
+            
+            <!-- Sub Charts -->
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Directory Structure Detail</div>
+                    <div class="chart-placeholder">
+                        [Bar Chart of Directory Changes]
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">File Permission Distribution</div>
+                    <div class="chart-placeholder">
+                        [Histogram of Permission Changes]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the Charts View:</strong></p>
+        <ul>
+            <li><strong>Overview Cards:</strong> Quick visualization of key pattern scores with before/after indicators</li>
+            <li><strong>Multiple Chart Types:</strong> Support for different visualization methods (radar, bar, line, etc.)</li>
+            <li><strong>Contextual Information:</strong> Chart descriptions and insights to explain the significance of changes</li>
+            <li><strong>Interactive Elements:</strong> Tabs for different pattern focuses and export options</li>
+            <li><strong>Change Indicators:</strong> Visual markers highlighting significant differences between pawprints</li>
+        </ul>
+        <p>The Charts View provides data-driven insights into the differences between pawprints, helping users identify and understand significant changes across patterns.</p>
+    </div>
+    
+    <div class="links">
+        <a href="05_raw_data_view.html" class="link-button">View Raw Data View</a>
+        <a href="06_summary_view.html" class="link-button">View Summary View</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

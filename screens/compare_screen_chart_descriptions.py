@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""
+Compare Screen - Chart Descriptions
+
+Generates HTML descriptions for charts to show alongside visualizations.
+
+Author: AIMF LLC
+Date: June 6, 2025
+"""
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+def generate_bar_html_description(self, bar_data):
+    """Generate HTML description for bar chart
+    
+    Args:
+        bar_data: Bar chart data
+        
+    Returns:
+        str: HTML description
+    """
+    try:
+        if not bar_data or 'labels' not in bar_data or len(bar_data['labels']) == 0:
+            return "<p>No bar chart data available.</p>"
+            
+        labels = bar_data['labels']
+        before = bar_data['before']
+        after = bar_data['after']
+        
+        # Generate description
+        html = "<h3>Bar Chart: Before vs After Comparison</h3>"
+        html += "<p>This chart shows the before and after scores for each pattern.</p>"
+        html += "<ul>"

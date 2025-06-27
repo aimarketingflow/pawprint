@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 V2 - Compare Screen Terminal Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #eee;
+            background-color: #222;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #bb86fc;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #333;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .feature {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #333;
+            border-left: 4px solid #bb86fc;
+            border-radius: 3px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .warning {
+            background-color: rgba(244, 67, 54, 0.2);
+            border-left: 4px solid #F44336;
+            padding: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <h1>Pawprinting PyQt6 V2</h1>
+        <h2>Compare Screen Terminal Guide</h2>
+    </div>
+
+    <h2>Overview</h2>
+    <p>
+        This guide provides instructions for running and testing the Compare Screen component of the 
+        Pawprinting PyQt6 V2 application, which offers dedicated interfaces for comparing pawprint files.
+    </p>
+
+    <h2>Running the Example Application</h2>
+    <p>To run the Compare Screen example application:</p>
+    <pre><code>cd /Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2
+python3 examples/compare_screen_example.py</code></pre>
+
+    <p>This will launch a demonstration window with:</p>
+    <ul>
+        <li>A "Load Sample Data" button to populate test data</li>
+        <li>The complete Compare Screen with all tabs:
+            <ul>
+                <li>Summary tab</li>
+                <li>Charts tab with visualization options</li>
+                <li>Raw data tab</li>
+                <li>Comparison details tab</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Running Unit Tests</h2>
+    <p>To verify the Compare Screen chart functionality:</p>
+    <pre><code>cd /Users/flowgirl/Documents/FolderHackingAnalysis/Pawprinting_PyQt6_V2
+python3 -m unittest tests/test_compare_screen_charts.py</code></pre>
+
+    <h2>Directory Structure</h2>
+    <p>The Compare Screen implementation consists of multiple modular components:</p>
+    
+    <ul>
+        <li><strong>Base Structure</strong>: <code>compare_screen_part1_structure.py</code>, <code>compare_screen_part2_ui_setup.py</code></li>
+        <li><strong>Tab Components</strong>: <code>compare_screen_part3_comparison_tab.py</code>, <code>compare_screen_part4c1_raw_data_tab.py</code>, <code>compare_screen_part4c2_summary_tab.py</code></li>
+        <li><strong>Data Processing</strong>: <code>compare_screen_part4c3a_data_loading.py</code>, <code>compare_screen_part4c3b_diff_generation.py</code>, <code>compare_screen_part4c3c_pattern_analysis.py</code></li>
+    </ul>
+
+    <h3>Chart Components:</h3>
+    <ul>
+        <li><strong>Data Extraction</strong>: <code>compare_screen_part4c3d_1_chart_data_extraction.py</code></li>
+        <li><strong>Chart Types</strong>:
+            <ul>
+                <li>Radar: <code>compare_screen_part4c3d_2_radar_chart.py</code></li>
+                <li>Bar: <code>compare_screen_part4c3d_3_bar_chart.py</code></li>
+                <li>Line: <code>compare_screen_part4c3d_4_line_chart.py</code></li>
+                <li>Pie: <code>compare_screen_part4c3d_5_pie_chart.py</code></li>
+                <li>Heatmap: <code>compare_screen_part4c3d_6_heatmap_chart.py</code></li>
+            </ul>
+        </li>
+        <li><strong>Insights</strong>: <code>compare_screen_part4c3d_7a_base_insights.py</code>, <code>compare_screen_part4c3d_7b_advanced_insights.py</code></li>
+        <li><strong>Export Functions</strong>: Files 8a through 8i</li>
+        <li><strong>UI Components</strong>: Files 9a through 10i</li>
+        <li><strong>Integration</strong>: <code>compare_screen_part4c3d_11_integration.py</code></li>
+    </ul>
+
+    <h2>Main Features</h2>
+
+    <div class="feature">
+        <h3>Interactive Charts</h3>
+        <p>Radar, bar, line, pie, and heatmap visualizations</p>
+    </div>
+
+    <div class="feature">
+        <h3>Data Export</h3>
+        <p>Export as images, CSV, HTML reports, or text summaries</p>
+    </div>
+
+    <div class="feature">
+        <h3>Filter Controls</h3>
+        <p>Filter by category and severity</p>
+    </div>
+
+    <div class="feature">
+        <h3>Dark Theme UI</h3>
+        <p>Consistent styling with neon purple accents</p>
+    </div>
+
+    <div class="feature">
+        <h3>Detailed Insights</h3>
+        <p>Pattern analysis with recommended actions</p>
+    </div>
+
+    <h2>Troubleshooting</h2>
+    
+    <p>If you encounter errors with matplotlib:</p>
+    <pre><code>pip3 install matplotlib numpy</code></pre>
+
+    <p>For PyQt6 issues:</p>
+    <pre><code>pip3 install PyQt6</code></pre>
+
+    <div class="warning">
+        <p><strong>Note:</strong> This component requires PyQt6, which is updated from the previous PyQt5 version.</p>
+    </div>
+</body>
+</html>

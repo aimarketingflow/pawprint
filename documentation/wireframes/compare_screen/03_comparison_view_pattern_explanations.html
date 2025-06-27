@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - Pattern Explanations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .pattern-explanations {
+            margin-bottom: 20px;
+        }
+        .pattern-explanation {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #2c3e50;
+            border-radius: 5px;
+            border: 1px solid #9b59b6;
+            position: relative;
+        }
+        .pattern-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .pattern-action {
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 1em;
+        }
+        .pattern-action:hover {
+            color: #3498db;
+        }
+        .pattern-title {
+            font-weight: bold;
+            color: #9b59b6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            padding-right: 60px; /* Make room for the action buttons */
+        }
+        .pattern-score {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+        .score-increased {
+            color: #2ecc71;
+        }
+        .score-decreased {
+            color: #e74c3c;
+        }
+        .pattern-desc {
+            font-size: 0.9em;
+            color: #ecf0f1;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .pattern-metrics {
+            background-color: rgba(52, 73, 94, 0.5);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+        .pattern-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .pattern-metric:last-child {
+            border-bottom: none;
+        }
+        .metric-label {
+            color: #bdc3c7;
+        }
+        .metric-value {
+            font-weight: bold;
+        }
+        .pattern-chart {
+            height: 120px;
+            background-color: #34495e;
+            border: 1px solid #4a6380;
+            border-radius: 4px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+        }
+        .pattern-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            margin-top: 10px;
+            color: #bdc3c7;
+        }
+        .pattern-tags {
+            display: flex;
+            gap: 5px;
+        }
+        .pattern-tag {
+            background-color: rgba(52, 152, 219, 0.3);
+            color: #3498db;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+        .pattern-severity {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+        }
+        .severity-high {
+            background-color: rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+        .severity-medium {
+            background-color: rgba(243, 156, 18, 0.3);
+            color: #f39c12;
+        }
+        .severity-low {
+            background-color: rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - Pattern Explanations</h1>
+    <p class="description">This wireframe shows detailed explanations for pattern changes detected between pawprint files, providing context and insights about what the changes mean.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <div class="pattern-explanations">
+                <!-- Pattern 1 -->
+                <div class="pattern-explanation">
+                    <div class="pattern-actions">
+                        <button class="pattern-action" title="Show in chart">📊</button>
+                        <button class="pattern-action" title="Show details">🔍</button>
+                        <button class="pattern-action" title="Collapse">▼</button>
+                    </div>
+                    <div class="pattern-title">
+                        Directory Structure Pattern
+                        <span class="pattern-score score-increased">(+9%)</span>
+                    </div>
+                    <div class="pattern-desc">
+                        This pattern tracks nested directory structure complexity. The score increase indicates improved organization 
+                        with more consistent nesting levels. The newer pawprint shows reduced variance in directory depths, 
+                        suggesting system updates have standardized the file hierarchy.
+                    </div>
+                    <div class="pattern-metrics">
+                        <div class="pattern-metric">
+                            <span class="metric-label">Old Score:</span>
+                            <span class="metric-value">0.78</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">New Score:</span>
+                            <span class="metric-value">0.85</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">Depth Uniformity:</span>
+                            <span class="metric-value">+12%</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">Max Nesting Depth:</span>
+                            <span class="metric-value">Reduced by 1 level</span>
+                        </div>
+                    </div>
+                    <div class="pattern-chart">
+                        [Pattern Score Trend Chart]
+                    </div>
+                    <div class="pattern-footer">
+                        <div class="pattern-tags">
+                            <span class="pattern-tag">directory-structure</span>
+                            <span class="pattern-tag">organization</span>
+                        </div>
+                        <div class="pattern-severity severity-low">Low Impact</div>
+                    </div>
+                </div>
+                
+                <!-- Pattern 2 -->
+                <div class="pattern-explanation">
+                    <div class="pattern-actions">
+                        <button class="pattern-action" title="Show in chart">📊</button>
+                        <button class="pattern-action" title="Show details">🔍</button>
+                        <button class="pattern-action" title="Collapse">▼</button>
+                    </div>
+                    <div class="pattern-title">
+                        File Type Distribution Pattern
+                        <span class="pattern-score score-increased">(+41%)</span>
+                    </div>
+                    <div class="pattern-desc">
+                        This pattern analyzes file type distribution. The increased variance suggests greater diversity in file types, 
+                        potentially from new software installations or system updates. While this creates more complexity, 
+                        it may indicate a more feature-rich system environment.
+                    </div>
+                    <div class="pattern-metrics">
+                        <div class="pattern-metric">
+                            <span class="metric-label">Old Variance:</span>
+                            <span class="metric-value">0.12</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">New Variance:</span>
+                            <span class="metric-value">0.17</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">Affected Areas:</span>
+                            <span class="metric-value">Library/Extensions (+3 types), Library/Frameworks (+2 types)</span>
+                        </div>
+                    </div>
+                    <div class="pattern-chart">
+                        [File Type Distribution Chart]
+                    </div>
+                    <div class="pattern-footer">
+                        <div class="pattern-tags">
+                            <span class="pattern-tag">file-types</span>
+                            <span class="pattern-tag">diversity</span>
+                        </div>
+                        <div class="pattern-severity severity-medium">Medium Impact</div>
+                    </div>
+                </div>
+                
+                <!-- Pattern 3 -->
+                <div class="pattern-explanation">
+                    <div class="pattern-actions">
+                        <button class="pattern-action" title="Show in chart">📊</button>
+                        <button class="pattern-action" title="Show details">🔍</button>
+                        <button class="pattern-action" title="Collapse">▼</button>
+                    </div>
+                    <div class="pattern-title">
+                        File Size Distribution Pattern
+                        <span class="pattern-score score-decreased">(-15%)</span>
+                    </div>
+                    <div class="pattern-desc">
+                        This pattern analyzes the distribution of file sizes across the system. The decreased score indicates 
+                        a shift toward larger files overall, with fewer small files present. This could suggest optimization of resources 
+                        through consolidation or replacement of many small files with fewer, larger bundled resources.
+                    </div>
+                    <div class="pattern-metrics">
+                        <div class="pattern-metric">
+                            <span class="metric-label">Old Average Size:</span>
+                            <span class="metric-value">356 KB</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">New Average Size:</span>
+                            <span class="metric-value">412 KB</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">Files > 1MB:</span>
+                            <span class="metric-value">+8 files</span>
+                        </div>
+                        <div class="pattern-metric">
+                            <span class="metric-label">Files < 10KB:</span>
+                            <span class="metric-value">-23 files</span>
+                        </div>
+                    </div>
+                    <div class="pattern-chart">
+                        [File Size Distribution Chart]
+                    </div>
+                    <div class="pattern-footer">
+                        <div class="pattern-tags">
+                            <span class="pattern-tag">file-sizes</span>
+                            <span class="pattern-tag">optimization</span>
+                        </div>
+                        <div class="pattern-severity severity-high">High Impact</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of Pattern Explanations:</strong></p>
+        <ul>
+            <li><strong>Detailed Context:</strong> Each pattern change includes an explanation of what it means</li>
+            <li><strong>Metrics:</strong> Specific numerical values showing before/after changes</li>
+            <li><strong>Visual Charts:</strong> Trend visualization for each pattern</li>
+            <li><strong>Impact Assessment:</strong> Severity indicators to highlight important changes</li>
+            <li><strong>Tags:</strong> Categorization of patterns for filtering and understanding</li>
+            <li><strong>Interactive Controls:</strong> Buttons to show the pattern in charts, view details, or collapse sections</li>
+        </ul>
+        <p>These detailed explanations help users understand not just what changed, but why it matters and what it might indicate.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

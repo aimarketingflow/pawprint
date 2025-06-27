@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting Automation Terminal Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2a0b45;
+        }
+        h1 {
+            border-bottom: 2px solid #9a4ef1;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #d9c3f8;
+            padding-bottom: 5px;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .command {
+            color: #9a4ef1;
+            font-weight: bold;
+        }
+        .parameter {
+            color: #4ec9b0;
+        }
+        .note {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-left: 5px solid #2196f3;
+            margin: 15px 0;
+        }
+        .logo {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <h1>AIMF LLC</h1>
+        <p><em>Pawprinting PyQt6 V2</em></p>
+    </div>
+    
+    <h1>Pawprinting Automation Terminal Guide</h1>
+    
+    <p>This guide provides instructions for using the Pawprinting automation features via the command line.</p>
+    
+    <h2>Basic Commands</h2>
+    
+    <h3>List Pawprint History</h3>
+    <p>View all previously analyzed folders in the pawprint history:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">list</span></code></pre>
+    
+    <h3>Refresh All Pawprints</h3>
+    <p>Re-analyze all folders in the pawprint history:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">all</span></code></pre>
+    
+    <h3>Refresh Recent Pawprints</h3>
+    <p>Re-analyze only the most recent N folders (default is 5):</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">recent</span> --count <span class="parameter">5</span></code></pre>
+    
+    <h3>Refresh Specific Folders</h3>
+    <p>Re-analyze specific folders by providing their paths:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">specific</span> --folders <span class="parameter">"/path/to/folder1" "/path/to/folder2"</span></code></pre>
+    
+    <h3>Specify Output Folder</h3>
+    <p>Set a custom output folder for the refreshed pawprints:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">all</span> --output-folder <span class="parameter">"/path/to/output"</span></code></pre>
+    
+    <h3>Control Overwrite Behavior</h3>
+    <p>Choose whether to overwrite existing pawprint files:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">all</span> --overwrite <span class="parameter">True</span></code></pre>
+    
+    <h2>Advanced Usage</h2>
+    
+    <h3>Combine Options</h3>
+    <p>You can combine multiple options as needed:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">refresh</span> --type <span class="parameter">recent</span> --count <span class="parameter">3</span> --output-folder <span class="parameter">"/custom/output"</span> --overwrite <span class="parameter">False</span></code></pre>
+    
+    <h3>Get Help</h3>
+    <p>For a full list of options and commands:</p>
+    <pre><code>python3 utils/automation_pawprint_cli.py <span class="command">--help</span></code></pre>
+    
+    <h2>Automation System</h2>
+    
+    <h3>Running the Automation System</h3>
+    <p>Start the automation system with default settings:</p>
+    <pre><code>python3 utils/automation_system.py</code></pre>
+    
+    <h3>Scheduling Tasks</h3>
+    <p>Configure task schedules in the automation state JSON file and start the system:</p>
+    <pre><code>python3 utils/automation_system.py --state-file <span class="parameter">/path/to/custom/state.json</span></code></pre>
+    
+    <div class="note">
+        <p><strong>Note:</strong> This guide covers the command line interface for the Pawprinting automation system. For GUI access to these features, use the main Pawprinting application interface.</p>
+    </div>
+</body>
+</html>

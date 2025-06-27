@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - Side-by-Side Diff View</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 1000px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .diff-view {
+            font-family: monospace;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .diff-options {
+            display: flex;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .diff-type-selector {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-type-option {
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #2c3e50;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-type-option.active {
+            background-color: #3498db;
+        }
+        .diff-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-action {
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 30px 1fr;
+            gap: 0;
+        }
+        .diff-title {
+            background-color: #34495e;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid #4a6380;
+        }
+        .diff-content {
+            padding: 10px;
+            background-color: #2c3e50;
+        }
+        .diff-line-numbers {
+            text-align: right;
+            padding: 10px 5px;
+            border-right: 1px solid #4a6380;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            background-color: #34495e;
+        }
+        .diff-line {
+            padding: 0 5px;
+            border-radius: 0;
+            margin: 0;
+            display: flex;
+        }
+        .diff-line-content {
+            flex-grow: 1;
+        }
+        .diff-add {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .diff-remove {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .diff-unchanged {
+            color: #bdc3c7;
+        }
+        .diff-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .diff-center-icon {
+            font-size: 1.5em;
+            color: #3498db;
+        }
+        .diff-center-line {
+            height: 100%;
+            width: 1px;
+            background-color: #4a6380;
+        }
+        .diff-info-header {
+            display: flex;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px 4px 0 0;
+            font-size: 0.9em;
+        }
+        .diff-info-label {
+            font-weight: bold;
+        }
+        .diff-info-path {
+            font-family: monospace;
+            color: #3498db;
+        }
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .json-path {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #34495e;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #3498db;
+            font-size: 0.9em;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - Side-by-Side Diff View</h1>
+    <p class="description">This wireframe shows the side-by-side diff visualization for comparing pawprint files, providing a clear view of before and after content.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+        <a href="03_comparison_view_diff_simple.html" class="link-button">View Simple Diff</a>
+        <a href="03_comparison_view_diff_json.html" class="link-button">View JSON Tree Diff</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <div class="diff-view">
+                <!-- Diff Options -->
+                <div class="diff-options">
+                    <div class="diff-type-selector">
+                        <div class="diff-type-option">Line Diff</div>
+                        <div class="diff-type-option">JSON Tree</div>
+                        <div class="diff-type-option active">Side by Side</div>
+                    </div>
+                    <div class="diff-actions">
+                        <div class="diff-action">Sync Scroll</div>
+                        <div class="diff-action">Show Context</div>
+                        <div class="diff-action">Copy</div>
+                    </div>
+                </div>
+                
+                <div class="diff-info-header">
+                    <div>
+                        <span class="diff-info-label">Current Path:</span>
+                        <span class="diff-info-path">patterns.pattern_2.details</span>
+                    </div>
+                    <div class="diff-action">Navigate to Next Difference</div>
+                </div>
+                
+                <!-- Side by Side Diff -->
+                <div class="side-by-side">
+                    <!-- Left Side (Before) -->
+                    <div>
+                        <div class="diff-title">BEFORE (Jun 1, 2025)</div>
+                        <div class="file-info">
+                            <span>system_pawprint_2025-06-01.json</span>
+                            <span>Line 142-152</span>
+                        </div>
+                        <div class="diff-content">
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">{</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">  "details": {</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "distribution": "normal",</div>
+                            </div>
+                            <div class="diff-line diff-remove">
+                                <div class="diff-line-content">    "variance": 0.12,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "confidence": 0.92,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "metrics": {</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "samples": 120,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "mean": 0.78,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "median": 0.81</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    }</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">  }</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Center -->
+                    <div class="diff-center">
+                        <div class="diff-center-line"></div>
+                        <div class="diff-center-icon">⟷</div>
+                        <div class="diff-center-line"></div>
+                    </div>
+                    
+                    <!-- Right Side (After) -->
+                    <div>
+                        <div class="diff-title">AFTER (Jun 2, 2025)</div>
+                        <div class="file-info">
+                            <span>system_pawprint_2025-06-02.json</span>
+                            <span>Line 142-152</span>
+                        </div>
+                        <div class="diff-content">
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">{</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">  "details": {</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "distribution": "normal",</div>
+                            </div>
+                            <div class="diff-line diff-add">
+                                <div class="diff-line-content">    "variance": 0.17,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "confidence": 0.92,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    "metrics": {</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "samples": 120,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "mean": 0.78,</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">      "median": 0.81</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">    }</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">  }</div>
+                            </div>
+                            <div class="diff-line diff-unchanged">
+                                <div class="diff-line-content">}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="json-path">
+                    <strong>Full JSON Path:</strong> patterns.pattern_2.details.variance
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the Side-by-Side Diff View:</strong></p>
+        <ul>
+            <li><strong>Parallel Comparison:</strong> Shows before and after content in parallel columns</li>
+            <li><strong>Clear Highlighting:</strong> Color coding shows added, removed, and unchanged lines</li>
+            <li><strong>Context Preservation:</strong> Maintains the context around changed lines</li>
+            <li><strong>Navigation:</strong> Quick access to next/previous differences</li>
+            <li><strong>Path Information:</strong> Shows the full JSON path for the current change</li>
+            <li><strong>File Metadata:</strong> Displays file source and line numbers for reference</li>
+        </ul>
+        <p>The Side-by-Side Diff View provides a traditional and familiar way to visualize differences between versions, making it easy to spot changes in their original context.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

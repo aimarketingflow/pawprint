@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - File Detail View</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .file-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #34495e;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .file-detail-title {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .file-path {
+            font-family: monospace;
+            color: #3498db;
+        }
+        .file-detail-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .file-detail-action {
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .file-detail-back {
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+        .back-icon {
+            margin-right: 5px;
+        }
+        .file-info-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .file-info-card {
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .file-info-card.before {
+            border-left: 3px solid #e74c3c;
+        }
+        .file-info-card.after {
+            border-left: 3px solid #2ecc71;
+        }
+        .file-info-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #bdc3c7;
+            font-size: 0.9em;
+        }
+        .file-info-label {
+            font-weight: bold;
+        }
+        .file-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+        .file-info-item-label {
+            color: #bdc3c7;
+        }
+        .file-info-item-value {
+            font-weight: bold;
+        }
+        .change-highlight {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #4a6380;
+            margin-bottom: 15px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-right: 5px;
+            font-size: 0.9em;
+        }
+        .tab.active {
+            background-color: #9b59b6;
+            border-bottom: 3px solid #9b59b6;
+            margin-bottom: -2px;
+        }
+        .tab-content {
+            min-height: 200px;
+            background-color: #34495e;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        .file-changes {
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .change-line {
+            padding: 3px 5px;
+            border-radius: 2px;
+            margin: 2px 0;
+        }
+        .change-add {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .change-remove {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .change-unchanged {
+            color: #bdc3c7;
+        }
+        .related-changes {
+            margin-top: 20px;
+        }
+        .related-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #bdc3c7;
+        }
+        .related-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .related-item {
+            padding: 8px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .related-path {
+            font-family: monospace;
+            color: #3498db;
+            font-size: 0.9em;
+        }
+        .related-type {
+            font-size: 0.8em;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        .type-added {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .type-deleted {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .type-modified {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - File Detail View</h1>
+    <p class="description">This wireframe shows what users see when they click on a specific file in the file explorer, displaying detailed information about changes to that file.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+        <a href="03_comparison_view_file_explorer.html" class="link-button">Back to File Explorer</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <!-- Back Button -->
+            <div class="file-detail-back">
+                <span class="back-icon">←</span> Back to File List
+            </div>
+            
+            <!-- File Detail Header -->
+            <div class="file-detail-header">
+                <div>
+                    <div class="file-detail-title">Modified File:</div>
+                    <div class="file-path">/System/Library/Kernels/kernel.development</div>
+                </div>
+                <div class="file-detail-actions">
+                    <div class="file-detail-action">Export Changes</div>
+                    <div class="file-detail-action">View Original</div>
+                </div>
+            </div>
+            
+            <!-- File Information -->
+            <div class="file-info-section">
+                <!-- Before -->
+                <div class="file-info-card before">
+                    <div class="file-info-header">
+                        <div class="file-info-label">BEFORE (Jun 1, 2025)</div>
+                        <div>system_pawprint_2025-06-01.json</div>
+                    </div>
+                    <div class="file-info-grid">
+                        <div class="file-info-item-label">Size:</div>
+                        <div class="file-info-item-value">8.2 MB</div>
+                        
+                        <div class="file-info-item-label">Last Modified:</div>
+                        <div class="file-info-item-value">2025-06-01 13:45:22</div>
+                        
+                        <div class="file-info-item-label">Permissions:</div>
+                        <div class="file-info-item-value">644 (-rw-r--r--)</div>
+                        
+                        <div class="file-info-item-label">Checksum (MD5):</div>
+                        <div class="file-info-item-value">a8f7e15b8...</div>
+                    </div>
+                </div>
+                
+                <!-- After -->
+                <div class="file-info-card after">
+                    <div class="file-info-header">
+                        <div class="file-info-label">AFTER (Jun 2, 2025)</div>
+                        <div>system_pawprint_2025-06-02.json</div>
+                    </div>
+                    <div class="file-info-grid">
+                        <div class="file-info-item-label">Size:</div>
+                        <div class="file-info-item-value"><span class="change-highlight">8.5 MB</span></div>
+                        
+                        <div class="file-info-item-label">Last Modified:</div>
+                        <div class="file-info-item-value"><span class="change-highlight">2025-06-02 09:12:05</span></div>
+                        
+                        <div class="file-info-item-label">Permissions:</div>
+                        <div class="file-info-item-value">644 (-rw-r--r--)</div>
+                        
+                        <div class="file-info-item-label">Checksum (MD5):</div>
+                        <div class="file-info-item-value"><span class="change-highlight">c2d9f47a1...</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Detail Tabs -->
+            <div class="tabs">
+                <div class="tab active">Changes</div>
+                <div class="tab">Metadata</div>
+                <div class="tab">Visualize</div>
+                <div class="tab">Related Files</div>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Changes Tab Content -->
+                <div class="file-changes">
+                    <div class="change-line change-unchanged">{</div>
+                    <div class="change-line change-unchanged">  "file_info": {</div>
+                    <div class="change-line change-unchanged">    "path": "/System/Library/Kernels/kernel.development",</div>
+                    <div class="change-line change-remove">-   "size": 8601248,</div>
+                    <div class="change-line change-add">+   "size": 8912872,</div>
+                    <div class="change-line change-remove">-   "last_modified": "2025-06-01T13:45:22",</div>
+                    <div class="change-line change-add">+   "last_modified": "2025-06-02T09:12:05",</div>
+                    <div class="change-line change-unchanged">    "permissions": "644",</div>
+                    <div class="change-line change-remove">-   "checksum": "a8f7e15b89d23c41e8f92d3b12b8a560",</div>
+                    <div class="change-line change-add">+   "checksum": "c2d9f47a16a8e90b723f5e15d94a2617",</div>
+                    <div class="change-line change-unchanged">    "owner": "root",</div>
+                    <div class="change-line change-unchanged">    "group": "wheel"</div>
+                    <div class="change-line change-unchanged">  },</div>
+                    <div class="change-line change-unchanged">  "statistics": {</div>
+                    <div class="change-line change-unchanged">    "segments": 5,</div>
+                    <div class="change-line change-remove">-   "symbols": 24815,</div>
+                    <div class="change-line change-add">+   "symbols": 25102,</div>
+                    <div class="change-line change-unchanged">    "architecture": "arm64e"</div>
+                    <div class="change-line change-unchanged">  }</div>
+                    <div class="change-line change-unchanged">}</div>
+                </div>
+                
+                <!-- Related Changes Section -->
+                <div class="related-changes">
+                    <div class="related-title">Related Files (3)</div>
+                    <div class="related-list">
+                        <div class="related-item">
+                            <div class="related-path">/System/Library/Extensions/IOUSBFamily.kext</div>
+                            <div class="related-type type-added">Added</div>
+                        </div>
+                        <div class="related-item">
+                            <div class="related-path">/System/Library/Caches/com.apple.kext.caches</div>
+                            <div class="related-type type-deleted">Deleted</div>
+                        </div>
+                        <div class="related-item">
+                            <div class="related-path">/System/Library/Frameworks/Kernel.framework</div>
+                            <div class="related-type type-modified">Modified</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the File Detail View:</strong></p>
+        <ul>
+            <li><strong>Before/After Comparison:</strong> Side-by-side view of file properties from both pawprints</li>
+            <li><strong>Change Highlighting:</strong> Visual indicators for what changed between versions</li>
+            <li><strong>Multiple Views:</strong> Tabbed interface for different aspects (changes, metadata, visualization)</li>
+            <li><strong>Related Files:</strong> Quick links to other files that changed in the same comparison</li>
+            <li><strong>Navigation:</strong> Easy way to return to the file list view</li>
+        </ul>
+        <p>This view provides focused details about a specific file's changes, helping users understand what changed and how it relates to other modifications.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawprinting PyQt6 V2 Compare Screen Report Terminal Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1, h2, h3, h4 {
+            color: #bb86fc;
+        }
+        
+        h1 {
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #333333;
+        }
+        
+        h2 {
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333333;
+            margin-top: 24px;
+        }
+        
+        h3 {
+            color: #03dac6;
+        }
+        
+        code {
+            background-color: #2d2d2d;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #bb86fc;
+        }
+        
+        .module {
+            margin-left: 20px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+            font-size: 14px;
+            color: #808080;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pawprinting PyQt6 V2 Compare Screen Report Terminal Guide</h1>
+        
+        <section>
+            <h2>Overview</h2>
+            <p>
+                This guide documents the modular report generation components in the Compare Screen. These modules provide functionality for generating detailed HTML comparison reports, chart visualizations, data exports, and user notifications.
+            </p>
+        </section>
+        
+        <section>
+            <h2>Module Structure</h2>
+            <p>
+                The Compare Screen report functionality is organized into the following modules:
+            </p>
+            
+            <h3>Report Generation</h3>
+            <div class="module">
+                <p><code>compare_screen_generate_full_report.py</code> - Main function to generate complete HTML report</p>
+                <p><code>compare_screen_report_header_html.py</code> - HTML header with document structure</p>
+                <p><code>compare_screen_report_summary_html.py</code> - Summary section with overall pattern changes</p>
+                <p><code>compare_screen_report_chart_html.py</code> - Chart visualization section</p>
+                <p><code>compare_screen_report_patterns_table_html.py</code> - Detailed pattern comparison table</p>
+                <p><code>compare_screen_report_footer_html.py</code> - Report footer with timestamp and copyright</p>
+                <p><code>compare_screen_custom_report_css.py</code> - CSS styling for dark theme reports</p>
+                <p><code>compare_screen_generate_report_filename.py</code> - Timestamped filename generation</p>
+            </div>
+            
+            <h3>Chart Visualization</h3>
+            <div class="module">
+                <p><code>compare_screen_check_matplotlib.py</code> - Availability check for matplotlib</p>
+                <p><code>compare_screen_draw_chart.py</code> - Main chart drawing dispatcher</p>
+                <p><code>compare_screen_draw_bar_chart.py</code> - Bar chart implementation</p>
+                <p><code>compare_screen_draw_pie_chart.py</code> - Pie chart implementation</p>
+                <p><code>compare_screen_draw_line_chart.py</code> - Line chart implementation</p>
+                <p><code>compare_screen_draw_radar_chart.py</code> - Radar chart implementation</p>
+                <p><code>compare_screen_embed_chart_image.py</code> - Encoding chart for HTML embedding</p>
+                <p><code>compare_screen_save_chart_image.py</code> - Save chart as PNG file</p>
+            </div>
+            
+            <h3>UI Components</h3>
+            <div class="module">
+                <p><code>compare_screen_create_chart_selector.py</code> - Chart type dropdown</p>
+                <p><code>compare_screen_create_chart_display.py</code> - Chart display widget</p>
+                <p><code>compare_screen_create_report_button.py</code> - Report generation button</p>
+                <p><code>compare_screen_create_export_button.py</code> - Data export button</p>
+                <p><code>compare_screen_create_save_chart_button.py</code> - Chart image save button</p>
+            </div>
+            
+            <h3>Event Handling</h3>
+            <div class="module">
+                <p><code>compare_screen_connect_report_button.py</code> - Connect report button events</p>
+                <p><code>compare_screen_connect_export_button.py</code> - Connect export button events</p>
+                <p><code>compare_screen_connect_save_chart_button.py</code> - Connect save button events</p>
+                <p><code>compare_screen_report_button_handler.py</code> - Report button click handler</p>
+                <p><code>compare_screen_export_data_handler.py</code> - Export data button click handler</p>
+                <p><code>compare_screen_charts_unavailable.py</code> - Fallback UI when matplotlib missing</p>
+            </div>
+            
+            <h3>User Interaction</h3>
+            <div class="module">
+                <p><code>compare_screen_open_report.py</code> - Open report in browser</p>
+                <p><code>compare_screen_report_success_notification.py</code> - Success notification dialog</p>
+                <p><code>compare_screen_handle_report_completion.py</code> - Post-report actions</p>
+                <p><code>compare_screen_data_export_notification.py</code> - Data export notification</p>
+                <p><code>compare_screen_error_dialog.py</code> - Error dialogs with dark styling</p>
+            </div>
+            
+            <h3>File Operations</h3>
+            <div class="module">
+                <p><code>compare_screen_write_json_data.py</code> - Write JSON data export</p>
+                <p><code>compare_screen_export_path_manager.py</code> - Manage export paths/directories</p>
+            </div>
+            
+            <h3>Integration</h3>
+            <div class="module">
+                <p><code>compare_screen_report_integration.py</code> - Main integration point</p>
+                <p><code>compare_screen_action_buttons_layout.py</code> - Button layout arrangement</p>
+                <p><code>compare_screen_chart_panel_layout.py</code> - Chart panel layout</p>
+                <p><code>compare_screen_chart_panel_widget.py</code> - Chart panel widget</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Example Usage</h2>
+            <p>To run the report generation functionality:</p>
+            <pre>
+# In Compare Screen class:
+
+# Initialize report functionality
+self.integrate_report_functionality()
+
+# On report button click:
+def on_report_button_clicked(self):
+    chart_data = self.extract_chart_data() 
+    export_path = self.get_export_path("report")
+    success, file_path = self.generate_comparison_report(
+        chart_data, self.before_file, self.after_file, export_path
+    )
+    self.handle_report_completion(success, file_path)
+            </pre>
+        </section>
+        
+        <section>
+            <h2>Dependencies</h2>
+            <ul>
+                <li><code>PyQt6</code> - UI components and dialogs</li>
+                <li><code>matplotlib</code> - Chart generation (with runtime availability check)</li>
+                <li><code>os</code>, <code>datetime</code>, <code>logging</code> - Standard libraries</li>
+                <li><code>base64</code> - Image embedding in HTML reports</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Export Paths</h2>
+            <p>Reports and data are organized in the user's Documents folder:</p>
+            <ul>
+                <li><code>~/Documents/Pawprinting_Exports/reports/</code> - HTML comparison reports</li>
+                <li><code>~/Documents/Pawprinting_Exports/data/</code> - JSON data exports</li>
+                <li><code>~/Documents/Pawprinting_Exports/images/</code> - PNG chart images</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Error Handling</h2>
+            <p>All modules implement comprehensive error handling and logging:</p>
+            <ul>
+                <li>Graceful fallbacks when matplotlib is unavailable</li>
+                <li>File operation error detection</li>
+                <li>User-friendly error notifications with dark styling</li>
+                <li>Detailed logging of operations and failures</li>
+            </ul>
+        </section>
+        
+        <div class="footer">
+            <p>AIMF LLC &copy; 2025 | Pawprinting PyQt6 V2</p>
+        </div>
+    </div>
+</body>
+</html>

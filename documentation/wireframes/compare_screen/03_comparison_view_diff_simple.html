@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Screen - Simple Diff Display</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+        }
+        .wireframe-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow: auto;
+        }
+        .component-frame {
+            border: 2px solid #333;
+            border-radius: 5px;
+            width: 800px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+        }
+        .diff-view {
+            font-family: monospace;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .diff-options {
+            display: flex;
+            justify-content: space-between;
+            background-color: #34495e;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .diff-type-selector {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-type-option {
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #2c3e50;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-type-option.active {
+            background-color: #3498db;
+        }
+        .diff-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .diff-action {
+            padding: 5px 10px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-block {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #2c3e50;
+            border-radius: 5px;
+            border: 1px solid #4a6380;
+        }
+        .diff-path {
+            color: #3498db;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .diff-path-actions {
+            display: flex;
+            gap: 5px;
+        }
+        .diff-path-action {
+            color: #bdc3c7;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-line {
+            padding: 2px 5px;
+            border-radius: 2px;
+            margin: 2px 0;
+        }
+        .diff-add {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        .diff-remove {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        .diff-unchanged {
+            color: #bdc3c7;
+        }
+        .diff-expand {
+            text-align: center;
+            color: #bdc3c7;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .diff-expand:hover {
+            color: #3498db;
+        }
+        .note {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 30px 0;
+        }
+        .link-button {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 8px 15px;
+            background-color: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Compare Screen - Simple Diff Display</h1>
+    <p class="description">This wireframe shows the simple diff display component for visualizing changes between pawprint files.</p>
+    
+    <div class="links">
+        <a href="03_comparison_view_main.html" class="link-button">Back to Main Comparison View</a>
+        <a href="03_comparison_view_diff_json.html" class="link-button">View JSON Tree Diff</a>
+    </div>
+    
+    <div class="wireframe-container">
+        <div class="component-frame">
+            <div class="diff-view">
+                <!-- Diff Options -->
+                <div class="diff-options">
+                    <div class="diff-type-selector">
+                        <div class="diff-type-option active">Line Diff</div>
+                        <div class="diff-type-option">JSON Tree</div>
+                        <div class="diff-type-option">Side by Side</div>
+                    </div>
+                    <div class="diff-actions">
+                        <div class="diff-action">Expand All</div>
+                        <div class="diff-action">Copy</div>
+                    </div>
+                </div>
+                
+                <!-- Diff Blocks -->
+                <div class="diff-block">
+                    <div class="diff-path">
+                        <span>patterns.pattern_1.score</span>
+                        <div class="diff-path-actions">
+                            <span class="diff-path-action" title="View in Chart">📊</span>
+                            <span class="diff-path-action" title="Copy Path">📋</span>
+                        </div>
+                    </div>
+                    <div class="diff-line diff-remove">- "score": 0.78,</div>
+                    <div class="diff-line diff-add">+ "score": 0.85,</div>
+                </div>
+                
+                <div class="diff-block">
+                    <div class="diff-path">
+                        <span>metadata.timestamp</span>
+                        <div class="diff-path-actions">
+                            <span class="diff-path-action" title="View in Chart">📊</span>
+                            <span class="diff-path-action" title="Copy Path">📋</span>
+                        </div>
+                    </div>
+                    <div class="diff-line diff-remove">- "timestamp": "2025-06-01T14:30:45",</div>
+                    <div class="diff-line diff-add">+ "timestamp": "2025-06-02T16:20:10",</div>
+                </div>
+                
+                <div class="diff-block">
+                    <div class="diff-path">
+                        <span>directory_structure.children[3].size</span>
+                        <div class="diff-path-actions">
+                            <span class="diff-path-action" title="View in Chart">📊</span>
+                            <span class="diff-path-action" title="Copy Path">📋</span>
+                        </div>
+                    </div>
+                    <div class="diff-line diff-remove">- "size": 1024,</div>
+                    <div class="diff-line diff-add">+ "size": 2048,</div>
+                </div>
+                
+                <div class="diff-block">
+                    <div class="diff-path">
+                        <span>patterns.pattern_2.details</span>
+                        <div class="diff-path-actions">
+                            <span class="diff-path-action" title="View in Chart">📊</span>
+                            <span class="diff-path-action" title="Copy Path">📋</span>
+                        </div>
+                    </div>
+                    <div class="diff-line diff-unchanged">  "details": {</div>
+                    <div class="diff-line diff-unchanged">    "distribution": "normal",</div>
+                    <div class="diff-line diff-remove">-   "variance": 0.12,</div>
+                    <div class="diff-line diff-add">+   "variance": 0.17,</div>
+                    <div class="diff-line diff-unchanged">    "confidence": 0.92</div>
+                    <div class="diff-line diff-unchanged">  }</div>
+                </div>
+                
+                <div class="diff-expand">
+                    Show 23 more changes...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <p><strong>Features of the Simple Diff Display:</strong></p>
+        <ul>
+            <li><strong>Line-based Diff:</strong> Traditional line-by-line comparison with color coding</li>
+            <li><strong>Path Navigation:</strong> Clear JSON paths to locate the changes</li>
+            <li><strong>Display Options:</strong> Toggle between different diff visualization types</li>
+            <li><strong>Interactive Elements:</strong> Expand/collapse sections, copy paths</li>
+            <li><strong>Color Coding:</strong> Green for additions, red for deletions, gray for unchanged content</li>
+        </ul>
+        <p>The Simple Diff Display is one of several ways to visualize differences between pawprint files in the Compare screen.</p>
+    </div>
+    
+    <div class="links">
+        <a href="index.html" class="link-button">Back to Wireframes Index</a>
+    </div>
+    
+    <footer>
+        <p>AIMF LLC - Pawprinting V2 Documentation</p>
+        <p>Created: June 6, 2025</p>
+    </footer>
+</body>
+</html>
