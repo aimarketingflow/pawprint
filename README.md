@@ -119,6 +119,23 @@ alias pawprint_pyqt6='cd /path/to/Pawprinting_PyQt6 && source venv_pawprinting_p
 2. Implement the functionality as needed
 3. Import and use the utility in screens or components
 
+![Pawprinting PyQt6 V2](./documentation/images/pawprinting_3panel_preview.png)
+
+## Roadmap
+
+The following features are planned for upcoming releases:
+
+- **Complete Automation System**: Monitoring and Scheduler tabs
+- **Enhanced Batch Processing**: Additional batch operations and templates
+- **Report Templates**: Customizable report templates for different use cases
+- **Enhanced Visualization**: Additional visualization options for pawprint comparisons
+- **Cloud Integration**: Optional cloud storage for pawprints and reports
+- **Mobile Companion App**: View pawprints and reports on mobile devices
+
+## Contributing
+
+We welcome contributions to the Pawprinting PyQt6 project! Please read our [contribution guidelines](./CONTRIBUTING.md) before submitting pull requests.
+
 ## License
 
 © 2025 AIMF LLC. All rights reserved.
